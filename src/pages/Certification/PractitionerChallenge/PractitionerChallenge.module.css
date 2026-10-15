@@ -1,0 +1,1273 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
+
+.pageContainer {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #06080c;
+
+  padding-top: 10px;
+
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(255, 153, 0, 0.05) 0%, transparent 50%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #e2e8f0;
+  position: relative;
+}
+
+.mainContent {
+  width: 100%;
+  max-width: 950px; 
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+/* ================= HERO EVAS ================= */
+.breadcrumb {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-bottom: 16px;
+}
+.breadcrumb span:last-child { color: #FF9900; font-weight: 700; }
+
+.heroSection {
+
+background: radial-gradient(circle at 0% 0%, rgba(251, 151, 2, 0.122) 0%, transparent 10%), #0d131f;
+
+
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  position: relative; /* Clave para que la insignia se mueva con respecto a esta tarjeta */
+  overflow: hidden;   /* Evita que elementos decorativos se salgan de la tarjeta */
+}
+
+
+/* Posicionamiento exacto en la esquina superior derecha */
+.heroBadgeRight {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  z-index: 10;
+}
+
+/* Resplandor difuminado suave de fondo */
+.badgeGlowEffect {
+  padding: 4px;
+  background: radial-gradient(circle, rgba(255, 183, 3, 0.25) 0%, rgba(255, 153, 0, 0.05) 60%, transparent 80%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cornerBadgeImg {
+  width: 100px; /* Tamaño perfecto para la esquina */
+  height: auto;
+  object-fit: contain;
+ filter: drop-shadow(0 0 5px #c0f7f3);
+        
+  transition: transform 0.3s ease;
+}
+
+.cornerBadgeImg:hover {
+  transform: scale(1.06);
+}
+
+
+
+
+.heroTitle {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  letter-spacing: -1px;
+}
+
+.heroDesc {
+  color: #94a3b8;
+  font-size: 1.05rem;
+  margin: 0 0 32px 0;
+  line-height: 1.6;
+}
+
+/* Barra de progreso conectada al estado */
+.courseProgress {
+  background: #06080c;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #1e293b;
+}
+
+.progressText {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  margin-bottom: 8px;
+}
+.progressText span:last-child { color: #10b981; font-weight: bold; }
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background-color: #1e293b;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #34d399); /* Verde completado */
+  border-radius: 4px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Animación súper suave */
+}
+
+/* ================= MÓDULOS & TITULARES ================= */
+.moduleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+
+.moduleHeader { 
+  border-bottom: 1px solid #1e293b; 
+  padding-bottom: 16px; 
+  text-align: center; /* Alinea todo el texto interior al centro */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra los elementos a nivel de flexbox (útil para la etiqueta superior) */
+}
+
+/* Si quieres darle un ancho máximo a los párrafos de abajo para que no queden como una línea interminable de lado a lado y se vean más como un bloque de texto ordenado, añade esto también: */
+.moduleHeader h3,
+.moduleHeader .subtext {
+  max-width: 950px; /* Evita que el texto ocupe todo el ancho de la pantalla */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.moduleTag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #00C7FF;
+  letter-spacing: 2px;
+}
+.moduleHeader h2 { font-size: 2.0rem; color: #fff; margin: 8px 0 0 0; font-weight: 1000; }
+.subtext { color: #94a3b8; font-size: 0.95rem; margin-top: 8px; }
+
+
+
+
+/* ================= DISEÑO FLUIDO DEL SYLLABUS (Módulo 1) ================= */
+.syllabusPaper {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-left: 12px;
+  border-left: 2px dashed #1e293b; /* Línea guía estilo documento */
+}
+
+.syllabusBlock {
+  position: relative;
+}
+
+/* Bolita en la línea guía */
+.syllabusBlock::before {
+  content: '';
+  position: absolute;
+  left: -17px;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #FF9900;
+  border: 2px solid #06080c;
+}
+
+.syllabusTitleWrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.pixelIcon {
+  width: auto;
+  height: 30px;
+  object-fit: contain;
+  image-rendering: pixelated; /* Para que el pixel art quede nítido */
+}
+
+.syllabusBlock h3 {
+  font-size: 1.25rem;
+  color: #fff;
+  margin: 0;
+}
+
+.syllabusBlock p {
+  color: #94a3b8;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0 0 12px 0;
+}
+
+.syllabusBlock strong { color: #cbd5e1; }
+.syllabusBlock em { color: #00C7FF; font-style: normal; font-weight: 600; }
+
+
+/* ================= ENLACES INLINE CON HOVER E ICONO ================= */
+.inlineLinkOrange {
+  color: #FF9900;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  border-bottom: 1px dashed transparent;
+}
+
+.inlineLinkOrange:hover {
+  border-bottom: 1px solid #FF9900;
+  color: #e68a00;
+}
+
+.inlineLinkGreen {
+  color: #10b981;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  border-bottom: 1px dashed transparent;
+}
+
+.inlineLinkGreen:hover {
+  border-bottom: 1px solid #10b981;
+  color: #059669;
+}
+
+.linkIconSvg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor; /* Hereda el color del enlace (naranja o verde) */
+}
+
+
+
+.syllabusList {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  padding-left: 20px;
+  margin: 0;
+}
+.syllabusList li { margin-bottom: 8px; }
+.syllabusList strong { color: #10b981; }
+
+.syllabusDivider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, #1e293b 0%, transparent 100%);
+}
+
+/* ================= HERRAMIENTAS LMS (Con estados completados) ================= */
+.lmsToolsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.lmsToolCard {
+  background-color: #0d131f;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.toolCompleted {
+  background-color: rgba(16, 185, 129, 0.05);
+  border-color: #10b981;
+}
+
+.toolIconWrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.toolCompleted .toolIconWrap {
+  background: #10b981;
+}
+
+.toolPixelIcon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.lmsToolCard h3 { font-size: 1.15rem; color: #fff; margin: 0 0 12px 0; }
+
+.lmsToolCard p { 
+  color: #64748b; 
+  font-size: 0.85rem; 
+  line-height: 1.5; 
+  margin: 0 0 32px 0; /* Aumentamos el margen inferior de 24px a 32px */
+  flex: 1; 
+}
+
+/* Botones y estado */
+.btnToolPrimary, .btnToolSecondary, .btnToolOutline {
+  width: 100%;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s;
+}
+.btnToolPrimary { background-color: #FF9900; color: #000; }
+.btnToolSecondary { background-color: #00C7FF; color: #000; }
+.btnToolOutline { background-color: transparent; color: #a78bfa; border: 1px solid #a78bfa; }
+.btnToolPrimary:hover, .btnToolSecondary:hover, .btnToolOutline:hover { transform: translateY(-2px); }
+
+.codeInputWrap { display: flex; width: 100%; gap: 8px; }
+.pinInput {
+  flex: 1; background: #06080c; border: 1px solid #1e293b; color: #fff;
+  padding: 10px; border-radius: 8px; text-align: center; outline: none;
+}
+.pinInput:focus { border-color: #00C7FF; }
+
+.statusCompleted {
+  width: 100%;
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* ================= MODAL ESTILO CIBERNETICO ================= */
+.modalOverlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modalBox {
+  background: #0d131f;
+  border: 1px solid #FF9900;
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255, 153, 0, 0.15);
+}
+
+.modalIcon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  image-rendering: pixelated;
+}
+
+.modalBox h3 { color: #fff; font-size: 1.4rem; margin: 0 0 12px; }
+.modalBox p { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin: 0 0 24px; }
+
+.modalActions { display: flex; gap: 12px; }
+.btnCancel, .btnConfirm, .btnUpcoming{
+  flex: 1;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: not-allowed;
+  border: 1px solid #334155;
+  background-color: rgba(30, 41, 59, 0.4);
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btnCancel { background: #1e293b; color: #cbd5e1; }
+.btnConfirm { background: #FF9900; color: #000; }
+.btnCancel:hover { background: #334155; }
+.btnConfirm:hover { background: #E68A00; }
+
+/* ================= CERTIFICADO COMUNITARIO ================= */
+.certificateBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Fondo original: #0d131f. Lo cambiamos a un degradado sutil morado */
+  background: linear-gradient(135deg, #110e1a 0%, #17122a 100%);
+  border: 1px solid #2d244a; /* Borde morado oscuro */
+  border-radius: 12px;
+  padding: 32px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra suave */
+}
+
+.bannerUnlocked {
+  background: linear-gradient(45deg, #1e1b4b 0%, #1e293b 100%);
+  border: 1px solid #a78bfa;
+  box-shadow: 0 0 30px rgba(167, 139, 250, 0.15);
+}
+
+.certBannerLeft { display: flex; align-items: center; gap: 24px; flex: 1; min-width: 300px; }
+.hugeIcon { width: 56px; height: 56px; image-rendering: pixelated; }
+.certBannerLeft h3 { color: #fff; font-size: 1.3rem; margin: 0 0 8px 0; }
+.certBannerLeft p { color: #94a3b8; font-size: 0.9rem; margin: 0; line-height: 1.5; }
+
+.btnClaimLocked {
+  background-color: rgba(30, 41, 59, 0.4); 
+  color: #64748b; 
+  border: 1px solid #334155;
+  font-family: 'JetBrains Mono', monospace; 
+  padding: 16px 24px;
+  border-radius: 8px; 
+  cursor: not-allowed;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sessionActions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px 16px 16px;
+  background-color: #06080c;
+}
+
+.checkIconSvg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  /* Animación de pop para el visto verde */
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+
+.btnClaimActive {
+  background-color: #a78bfa; color: #000; border: none;
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; padding: 16px 24px;
+  border-radius: 8px; cursor: pointer;
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.4);
+  animation: pulseCert 2s infinite;
+}
+
+@keyframes pulseCert {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* ================= SESIONES GRID ================= */
+.sessionsGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+.sessionCard {
+  background-color: #0b0e14; 
+  border: 1px solid #1e293b; 
+  border-radius: 12px;
+  overflow: hidden; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between;
+  transition: border-color 0.3s ease;
+  position: relative; /* <--- ¡ESTO ES VITAL! AGRÉGALO */
+}
+.sessionHeaderBar {
+  background-color: #06080c; padding: 12px 16px; display: flex; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #FF9900; border-bottom: 1px solid #1e293b;
+}
+.speakerBox { padding: 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #1e293b; }
+.speakerAvatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid #FF9900; }
+.speakerName { font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 2px 0; }
+.speakerRole { font-size: 0.75rem; color: #94a3b8; margin: 0; line-height: 1.3; }
+.sessionBody { padding: 24px 16px; flex: 1; }
+.sessionNumTag { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; color: #00C7FF; margin-bottom: 8px; display: inline-block;}
+.sessionTitle { font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0; line-height: 1.4; }
+.sessionFooter { padding: 16px; background-color: #06080c; border-top: 1px solid #1e293b; }
+.btnMeetupFull { display: block; width: 100%; background-color: #FF9900; color: #000; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 700; text-align: center; padding: 12px; border-radius: 6px; text-decoration: none;}
+
+.cardLocked { opacity: 0.6; }
+.lockedBody { padding: 60px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; }
+
+.lockIcon { 
+  width: 48px; /* Ajusta el tamaño según prefieras */
+  height: 48px;
+  margin-bottom: 16px; 
+  opacity: 0.4; /* Esto le da el efecto semitransparente */
+  image-rendering: pixelated; /* Mantiene los bordes duros del pixel art */
+  object-fit: contain;
+}
+
+.sessionNumTagLocked { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #64748b; margin-bottom: 4px; }
+.sessionTitleLocked { font-size: 1.2rem; color: #fff; margin: 0 0 8px 0; }
+.lockedDesc { font-size: 0.8rem; color: #64748b; margin: 0; }
+
+/* =========================================
+   RESPONSIVE DESIGN (MÓVILES Y TABLETS)
+   ========================================= */
+@media (max-width: 768px) {
+  
+  /* --- 1. HERO SECTION Y TÍTULO --- */
+  .heroSection {
+    padding: 24px 16px; 
+  }
+
+  /* Hacemos el texto fluido y limitamos su ancho para que no choque con la medalla */
+  .heroTitle {
+    font-size: clamp(1.5rem, 8vw, 2rem); 
+    line-height: 1.2;
+    white-space: normal; 
+    word-wrap: break-word;
+    max-width: 65%; /* <-- CLAVE: Obliga al título a bajar antes de tocar la medalla */
+  }
+
+  .heroDesc {
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+
+  /* --- ARREGLO DEL ESCUDO: Lo bajamos para no tapar el breadcrumb --- */
+  .heroBadgeRight {
+    top: 55px; /* Lo bajamos a la altura del título */
+    right: 16px;
+  }
+
+  .cornerBadgeImg {
+    width: 70px; /* Insignia más pequeña en celulares */
+  }
+
+  /* --- 2. BARRA DE PROGRESO --- */
+  .courseProgress {
+    padding: 12px;
+  }
+
+  .progressText {
+    flex-direction: column; 
+    gap: 4px;
+    align-items: flex-start;
+    font-size: 0.75rem;
+  }
+
+  /* --- 3. MÓDULO 1: SYLLABUS --- */
+  .syllabusPaper { 
+    border-left: none; 
+    padding-left: 0; 
+  }
+  
+  .syllabusBlock::before { display: none; }
+
+  .syllabusBlock h3 {
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+
+  /* --- 4. MÓDULO 2: HERRAMIENTAS --- */
+  .lmsToolsGrid {
+    grid-template-columns: 1fr !important; 
+    gap: 16px !important;
+  }
+
+  /* --- 5. MÓDULO 3: CERTIFICADO --- */
+  .certificateBanner { 
+    flex-direction: column; 
+    text-align: center; 
+    padding: 24px 16px;
+  }
+  
+  .certBannerLeft { 
+    flex-direction: column; 
+    text-align: center; 
+    gap: 16px; 
+  }
+  
+  .btnClaimLocked, .btnClaimActive { 
+    width: 100%; 
+    justify-content: center;
+  }
+
+  /* --- 6. MÓDULO 4: CALENDARIO DE CHARLAS --- */
+  .ITBAU {
+    font-size: clamp(2rem, 8vw, 2.5rem); 
+    letter-spacing: -1px;
+    margin: 8px 0 16px 0;
+  }
+
+  .wideSessionsWrapper {
+    padding: 0 16px; 
+  }
+
+  /* --- ARREGLO DE LAS CHARLAS: Forzamos la columna --- */
+  .sessionsGrid {
+    display: flex !important; /* Cambiamos el Grid a Flex para forzar el apilamiento */
+    flex-direction: column !important; /* Pone una tarjeta debajo de la otra */
+    gap: 24px !important;
+  }
+  
+  .sessionCard {
+    width: 100% !important; /* Asegura que la tarjeta tome todo el ancho de la pantalla */
+  }
+
+  .sessionBody, .techActionsContainer {
+    padding: 16px;
+  }
+  
+  /* --- ARREGLO FLECHA: Ocultar botón "Ver Calendario" en móviles --- */
+  .scrollDownContainer {
+    display: none !important; /* El !important asegura que desaparezca sí o sí */
+  }
+}
+
+
+/* Estilos para el nuevo banner de la sesión */
+
+.sessionCard:hover .sessionBannerImg {
+  transform: scale(1.05); /* Pequeño zoom al pasar el ratón */
+}
+
+
+/* Ajustes a la tipografía del título para parecerse a tu referencia */
+.sessionNumTag { 
+  font-family: 'JetBrains Mono', monospace; 
+  font-size: 0.75rem; 
+  font-weight: 700; 
+  color: #FF9900; /* Cambiado a naranja */
+  margin-bottom: 8px; 
+  display: inline-block;
+  letter-spacing: 1px;
+}
+
+.sessionTitle { 
+  font-size: 1.25rem; /* Un poco más grande */
+  font-weight: 800; 
+  color: #fff; 
+  margin: 0 0 8px 0; 
+  line-height: 1.3; 
+  letter-spacing: -0.5px;
+}
+
+
+
+/* ================= NUEVO CONTENEDOR EXCLUSIVO PARA LAS SESIONES ================= */
+.wideSessionsWrapper {
+  width: 100%;
+  max-width: 1240px; /* Ancho amplio solo para este bloque */
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ================= SESIONES GRID (3 Columnas Amplias y Espaciosas) ================= */
+.sessionsGrid { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 32px; /* Mayor separación horizontal y vertical entre tarjetas */
+}
+
+.sessionCard {
+  background-color: #0d131f; 
+  border: 1px solid #1e293b; 
+  border-radius: 12px;
+  overflow: hidden; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between;
+}
+
+/* ================= INSIGNIA FLOTANTE Y DIFUMINADA (Estilo Héroe) ================= */
+.heroBadgeWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -65px; /* Sube la insignia para que sobresalga por encimita del borde superior */
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Resplandor difuminado suave de fondo (tipo aura dorada/amarilla) */
+
+
+.moduleHeader .ITBAU {
+  
+  font-family: var(--font-sans, 'Geist', sans-serif);
+  font-weight: 800; /* Grosor máximo para replicar el estilo de tu imagen */
+  font-size: clamp(2.5rem, 5vw, 3.5rem); /* Letra mucho más grande y adaptable */
+  text-align: center; /* Esto es lo que centra el texto correctamente */
+  letter-spacing: -2px; /* Junta las letras ligeramente para ese look moderno y sólido */
+  color: #ffffff;
+  margin: 16px 0 24px 0;
+  display: block;
+  width: 100%;
+}
+
+.THE{
+    color: #f89a04;
+    /*color: #d99425;*/
+}
+
+
+/* ================= NUEVO DISEÑO DE SESIÓN (Estilo Terminal AWS) ================= */
+
+.sessionCard {
+  background-color: #0b0e14; /* Fondo oscuro estilo AWS */
+  border: 1px solid #1e293b; 
+  border-radius: 12px;
+  overflow: hidden; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between;
+  transition: border-color 0.3s ease;
+}
+
+.sessionCard:hover {
+  border-color: #334155;
+}
+
+/* Cabecera superior pequeña con la fecha */
+.sessionHeaderBar {
+  background-color: #06080c; 
+  padding: 12px 20px; 
+  display: flex; 
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace; 
+  font-size: 0.75rem; 
+  border-bottom: 1px solid #1e293b;
+}
+
+.awsText { color: #FF9900; font-weight: 700; }
+.itbText { color: #94a3b8; font-weight: normal; margin-left: 4px; }
+.dateText { color: #FF9900; }
+
+/* Contenedor exacto para tu foto exportada de Photoshop */
+.photoshopBannerWrapper {
+  width: 100%;
+  background-color: #000;
+  border-bottom: 1px solid #1e293b;
+  display: flex;
+}
+
+.photoshopBannerImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Ajustes del cuerpo de la sesión */
+.sessionBody { 
+  padding: 24px; 
+  flex: 1; 
+  background-color: #0f131a; 
+}
+
+.sessionNumAndCounter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.sessionNumTag { 
+  font-family: 'JetBrains Mono', monospace; 
+  font-size: 0.8rem; 
+  font-weight: 700; 
+  color: #FF9900; 
+  text-transform: uppercase;
+}
+
+.sessionCounterTag {
+  font-family: 'JetBrains Mono', monospace; 
+  font-size: 0.75rem; 
+  color: #64748b;
+}
+
+.sessionTitle { 
+  font-size: 1.3rem; 
+  font-weight: 800; 
+  color: #fff; 
+  margin: 0 0 12px 0; 
+  line-height: 1.4; 
+}
+
+.sessionDescLight {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+}
+
+.sessionDateLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 0.8rem;
+  margin-bottom: 20px;
+}
+
+.inlineMeetupLink {
+  color: #FF9900;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.2s ease;
+}
+
+.inlineMeetupLink:hover {
+  transform: translateX(4px);
+}
+
+/* ================= ACCIONES: QUIZ Y ENCUESTA (Estilo a tu medida) ================= */
+.techActionsContainer {
+  background-color: #0b0e14;
+  padding: 20px 24px;
+  border-top: 1px solid #1e293b;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Mayor separación entre quiz y encuesta */
+}
+
+.techActionRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actionLabelGroup {
+  display: flex;
+  align-items: flex-start; /* Alineación arriba para que el punto quede junto al título */
+  gap: 12px;
+}
+
+.dotIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981; 
+  margin-top: 5px; /* Baja un poco el punto para alinearlo con el texto */
+}
+
+.dotIndicator.pending {
+  background-color: #64748b; 
+}
+
+.actionTextColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.actionLabelText {
+  color: #10b981;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.actionLabelSub {
+  color: rgba(16, 185, 129, 0.8);
+  font-size: 0.8rem;
+}
+
+.actionLabelText.pending { color: #94a3b8; }
+.actionLabelSub.pending { color: #64748b; }
+
+.btnTextLinkDisabled {
+  background: none;
+  border: none;
+  color: #475569; /* Un gris muy oscuro para que se vea inactivo */
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  cursor: not-allowed;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btnTextLink:hover {
+  color: #fff;
+}
+
+.btnTextLink.completed {
+  color: #10b981;
+  cursor: default;
+}
+
+/* Ajustes del cuerpo de la sesión */
+.sessionBody { 
+  padding: 24px; 
+  flex: 1; 
+  background-color: #121820;
+}
+
+.sessionTitle { 
+  font-size: 1.3rem; 
+  font-weight: 800; 
+  color: #fff; 
+  margin: 0 0 12px 0; 
+  line-height: 1.4; 
+}
+
+.sessionDescLight {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+}
+
+.sessionDateLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 0.8rem;
+  margin-bottom: 20px;
+}
+
+/* Nuevo enlace de Meetup en línea */
+.inlineMeetupLink {
+  color: #FF9900;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.2s ease;
+}
+
+.inlineMeetupLink:hover {
+  transform: translateX(4px);
+}
+
+/* ================= ACCIONES: QUIZ Y ENCUESTA ================= */
+.techActionsContainer {
+  background-color: #0b0e14;
+  padding: 16px 24px;
+  border-top: 1px solid #1e293b;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.techActionRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actionLabelGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dotIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981; /* Verde */
+}
+
+.dotIndicator.pending {
+  background-color: #64748b; /* Gris si es la encuesta */
+}
+
+.actionLabelText {
+  color: #10b981;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.actionLabelText.pending {
+  color: #94a3b8;
+}
+
+/* Botones invisibles como enlaces */
+.btnTextLink {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+}
+
+.btnTextLink:hover {
+  color: #fff;
+}
+
+.btnTextLink.completed {
+  color: #10b981;
+  cursor: default;
+}
+
+
+/* --- FOOTER ESTILO AWS UG ECUADOR --- */
+
+
+
+/* --- ILUSTRACIÓN DEL PUEBLO Y KIROS --- */
+.townIllustration {
+  width: 100%;
+  max-width: 1200px;
+  margin: -160px auto 0; /* Lo subimos un poquito más para que destaque */
+  display: block;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Animaciones de los fantasmitas de Kiro respirando/flotando */
+.ghostAnim1 { animation: ghostFloat 4s ease-in-out infinite; }
+.ghostAnim2 { animation: ghostFloat 3.5s ease-in-out infinite alternate-reverse; }
+.ghostAnim3 { animation: ghostFloat 4.5s ease-in-out infinite 1s; }
+
+@keyframes ghostFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+/* NUEVO: Ventanas que titilan suavemente para darle vida al pueblo */
+.windowGlow {
+  animation: windowPulse 4s infinite alternate;
+}
+
+@keyframes windowPulse {
+  0% { opacity: 0.2; }
+  100% { opacity: 0.9; }
+}
+
+/* La línea de coordenadas limpia y elegante */
+.footerLocationBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(90deg, #a78bfa 0%, #ff9900 100%) 1;
+}
+
+.coordText {
+  font-family: monospace;
+  color: #d1d5db;
+  font-size: 0.85rem;
+}
+
+.countryText {
+  color: #ff9900;
+  font-family: monospace;
+  font-size: 0.9rem;
+  text-transform: lowercase;
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: #6b7280;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footerBottom {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    align-items: center;
+  }
+}
+
+/* ================= EFECTO SORPRESA (BLUR) ================= */
+.surpriseOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(11, 14, 20, 0.75); /* Fondo oscuro al 75% de transparencia */
+  backdrop-filter: blur(5px); /* Efecto cristal/desenfocado a lo que está atrás */
+  z-index: 20; /* Para que quede por encima de todo el texto y botones */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+}
+
+.surpriseIcon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 16px;
+  image-rendering: pixelated;
+  opacity: 0.9;
+  animation: floatSurprise 3s ease-in-out infinite; /* Animación de flotar */
+}
+
+@keyframes floatSurprise {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.surpriseTitle {
+  color: #FF9900;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Sombra para que se lea perfecto */
+}
+
+.surpriseDesc {
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 250px;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+}
+
+
+.skillLogo {
+  height: 45px; /* Ajusta este valor para hacerlo más grande o pequeño */
+  width: auto;
+  object-fit: contain;
+  
+  /* TRUCO: Como el logo tiene letras negras y tu fondo es oscuro, 
+     esto le pondrá un fondo blanco sutil redondeado para que se lea perfecto */
+  background-color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 10px;
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+/* =========================================
+   BOTÓN SCROLL HACIA ABAJO
+   ========================================= */
+.scrollDownContainer {
+  position: fixed;     /* Esto lo "despega" de la página y lo hace flotar */
+  right: 32px;         /* Lo empuja hacia el lado derecho */
+  top: 240px;        /* Lo coloca en la esquina inferior */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 999;        /* Asegura que flote por encima de textos e imágenes */
+}
+
+.scrollArrowBtn {
+  background-color: rgba(6, 8, 12, 0.8); /* Fondo oscuro para que no se pierda al hacer scroll */
+  backdrop-filter: blur(4px);            /* Efecto cristal elegante */
+  border: 1px solid rgba(255, 153, 0, 0.4);
+  color: #FF9900;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: floatBounce 2s infinite ease-in-out;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.6); /* Sombra para resaltar */
+}
+
+.scrollArrowBtn:hover {
+  background-color: rgba(255, 153, 0, 0.15);
+  border-color: #FF9900;
+  box-shadow: 0 0 15px -2px rgba(255, 153, 0, 0.6);
+  animation-play-state: paused;
+}
+
+.scrollText {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: #FF9900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background-color: rgba(6, 8, 12, 0.8); /* Pastilla de fondo para que el texto se lea siempre */
+  padding: 4px 8px;
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+}
+
+/* Animación de salto suave */
+@keyframes floatBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}

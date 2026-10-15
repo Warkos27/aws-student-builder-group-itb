@@ -1,0 +1,1038 @@
+.aboutContainer {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0b0e14;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+
+   /* =========================================
+   1. HERO SECTION (Cabecera a 2 columnas)
+   ========================================= */
+.heroSection {
+  width: 100%;
+  max-width: 1200px; /* Ampliado un poco para que quepan bien ambas columnas */
+  margin: 0 auto;
+  padding: 160px 20px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* Contenedor del texto (ahora a la derecha) */
+.heroText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.breadcrumb {
+  color: #6b7280;
+  font-family: monospace;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.blinkingCursor {
+  display: inline-block;
+  width: 0.4em;
+  height: 0.9em;
+  background-color: #FF57E9;
+  vertical-align: baseline;
+  animation: cursorBlink 1s step-end infinite;
+  margin-left: 8px;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.heroDesc {
+  color: #9ca3af;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 95%;
+}
+
+/* --- Contenedor del SVG (ahora a la izquierda) --- */
+.heroVisual {
+  display: flex;
+  justify-content: flex-start; /* Esto empuja el SVG hacia la izquierda */
+  align-items: center;
+}
+
+.pixelArtContainer {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  aspect-ratio: 1 / 1;
+  background-color: rgba(10, 14, 20, 0.6); 
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 5% 5%;
+}
+
+.pixelSvg {
+  width: 80%;
+  height: 80%;
+  z-index: 2;
+}
+
+.pixelArtLabels {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-family: monospace;
+  font-size: 0.75rem;
+  z-index: 3;
+}
+
+.coordColor { color: #FF9900; }
+.fileColor { color: #9ca3af; }
+
+.floatSlow { animation: float 6s ease-in-out infinite; }
+.floatFast { animation: float 4s ease-in-out infinite alternate-reverse; }
+.typingBlink { animation: typeBlink 1s infinite step-end; }
+.smokeRise { animation: smoke 3s infinite ease-in; opacity: 0; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes typeBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes smoke {
+  0% { transform: translateY(0) scale(1); opacity: 0.6; }
+  100% { transform: translateY(-8px) scale(1.5); opacity: 0; }
+}
+
+@media (max-width: 900px) {
+  .heroSection {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .heroVisual {
+    justify-content: center;
+    order: -1; /* Asegura que el SVG salga arriba del texto en celulares */
+  }
+}
+
+/* =========================================
+   2. TEAM SECTION (Tarjetas de Equipo)
+   ========================================= */
+.teamSection {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 100px;
+  padding: 0 20px;
+}
+
+.sectionLabel {
+  color: #a78bfa;
+  font-family: monospace;
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+  display: block;
+}
+
+.sectionLabel::before {
+  content: "// ";
+}
+
+.teamTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 40px;
+  font-family: monospace;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.teamCard {
+  background: #121820;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.teamCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  border-color: rgba(167, 139, 250, 0.3);
+
+  
+}
+
+.cardImageWrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Fotos cuadradas perfectas */
+  overflow: hidden;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+  transition: transform 0.5s ease;
+}
+
+.teamCard:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.cardInfo {
+  padding: 24px;
+  /* Convertimos la caja de info en un contenedor flexible */
+  display: flex;
+  flex-direction: column;
+  /* Hacemos que ocupe todo el alto sobrante de la tarjeta */
+  height: 100%; 
+  /* Agregamos flex-grow: 1 para que se estire */
+  flex-grow: 1;
+}
+
+.memberName {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.badgeRole {
+  background: rgba(168, 85, 247, 0.1);
+  color: #d946ef;
+  border: 1px solid rgba(217, 70, 239, 0.3);
+  font-family: monospace;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.badgeExtra {
+  background: rgba(255, 255, 255, 0.05);
+  color: #d1d5db;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: monospace;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 16px;
+
+  margin-top: auto; 
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 16px;
+}
+
+.socialIcon {
+  color: #9ca3af;
+  transition: color 0.3s;
+}
+
+.socialIcon:hover {
+  color: #a78bfa;
+}
+
+
+/* =========================================
+   3. FOUNDER SECTION (Sobre el fundador)
+   ========================================= */
+.founderSection {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto 120px;
+  padding: 0 20px;
+}
+
+/* LA TARJETA PRINCIPAL (Con el nuevo degradado) */
+.founderBox {
+  /* Degradado sutil de morado oscuro a negro profundo */
+  background: linear-gradient(135deg, rgba(30, 27, 75, 0.8) 0%, rgba(10, 13, 20, 1) 70%);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 16px;
+  padding: 50px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.founderBox::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+/* TÍTULO (Ahora ocupa todo el ancho) */
+.founderTitle {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 30px;
+  line-height: 1.2;
+  width: 100%; /* Se estira completamente */
+  position: relative;
+  z-index: 2;
+}
+
+/* ESTRUCTURA INTERNA (Divide el texto y la imagen) */
+.founderLayout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+/* CONTENEDOR DE TEXTO (A la izquierda) */
+.founderContent {
+  flex: 1; /* Ocupa el espacio disponible */
+  z-index: 2;
+}
+
+.founderDesc {
+  color: #d1d5db;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.founderQuote {
+  border-left: 4px solid #d946ef;
+  padding-left: 20px;
+  margin: 30px 0;
+}
+
+.founderQuote p {
+  color: #ffffff;
+  font-family: monospace;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.founderButtons {
+  display: flex;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.btnOutline {
+  background: transparent;
+  color: #d1d5db;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btnOutline:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* AVATAR (A la derecha, mantuvimos el degradado de máscara) */
+.founderAvatarInside {
+  width: 320px; 
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  -webkit-mask-image: radial-gradient(circle closest-side, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(circle closest-side, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+}
+
+.legoImageFaded {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  animation: floatLego 6s ease-in-out infinite;
+}
+
+@keyframes floatLego {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+/* RESPONSIVIDAD (Celulares y Tablets) */
+@media (max-width: 960px) {
+  .founderBox {
+    padding: 30px 20px;
+  }
+  .founderTitle {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  .founderLayout {
+    flex-direction: column-reverse; /* En móvil, avatar arriba, texto abajo */
+  }
+  .founderQuote {
+    text-align: left;
+  }
+  .founderButtons {
+    justify-content: center;
+  }
+  .founderAvatarInside {
+    width: 250px;
+  }
+}
+
+
+/* =========================================
+   4. FOOTER (Exactamente igual al Home)
+   ========================================= */
+.footer {
+  width: 100%;
+  background: #0b0e14;
+  padding: 40px 6% 30px; 
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 10;
+  margin-top: 80px;
+}
+
+.townIllustration {
+  width: 100%;
+  max-width: 1200px;
+  margin: -160px auto 0; 
+  display: block;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.ghostAnim1 { animation: ghostFloat 4s ease-in-out infinite; }
+.ghostAnim2 { animation: ghostFloat 3.5s ease-in-out infinite alternate-reverse; }
+.ghostAnim3 { animation: ghostFloat 4.5s ease-in-out infinite 1s; }
+
+@keyframes ghostFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+.windowGlow {
+  animation: windowPulse 4s infinite alternate;
+}
+
+@keyframes windowPulse {
+  0% { opacity: 0.2; }
+  100% { opacity: 0.9; }
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.footerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footerDesc {
+  color: #d1d5db;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+.footerSocials {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 12px;
+}
+
+.socialBox {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.socialBox:hover {
+  background: #ff9900;
+  border-color: #ff9900;
+  color: #000;
+  transform: translateY(-3px);
+}
+
+.footerColTitle {
+  color: #a78bfa;
+  font-family: monospace;
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+.footerColTitle::before {
+  content: "// ";
+}
+
+.footerLinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footerLinks li a, .footerLinks li span {
+  color: #d1d5db;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footerLinks li a:hover {
+  color: #ff9900;
+}
+
+.footerLocationBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(90deg, #a78bfa 0%, #ff9900 100%) 1;
+}
+
+.coordText {
+  font-family: monospace;
+  color: #d1d5db;
+  font-size: 0.85rem;
+}
+
+.countryText {
+  color: #ff9900;
+  font-family: monospace;
+  font-size: 0.9rem;
+  text-transform: lowercase;
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: #6b7280;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footerBottom {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    align-items: center;
+  }
+}.aboutContainer {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0b0e14;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* =========================================
+   1. HERO SECTION (Cabecera)
+   ========================================= */
+.heroSection {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 160px 20px 80px; /* Espacio para el navbar fijo */
+}
+
+.breadcrumb {
+  color: #6b7280;
+  font-family: monospace;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.heroTitle {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.blinkingCursor {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.9em;
+  background-color: #FF57E9; /* Fucsia */
+  vertical-align: baseline;
+  animation: cursorBlink 1s step-end infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.heroDesc {
+  color: #9ca3af;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+/* =========================================
+   2. TEAM SECTION (Tarjetas de Equipo)
+   ========================================= */
+.teamSection {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 100px;
+  padding: 0 20px;
+}
+
+.sectionLabel {
+  color: #a78bfa;
+  font-family: monospace;
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+  display: block;
+}
+
+.sectionLabel::before {
+  content: "// ";
+}
+
+.teamTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 40px;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+@media (max-width: 1024px) {
+  .teamGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* En celulares, ponemos una debajo de la otra */
+@media (max-width: 600px) {
+  .teamGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.teamCard {
+  background: #121820;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.teamCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  border-color: rgba(167, 139, 250, 0.3);
+}
+
+.cardImageWrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Fotos cuadradas perfectas */
+  overflow: hidden;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.teamCard:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.cardInfo {
+  padding: 24px;
+}
+
+.memberName {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.badgeRole {
+  background: rgba(168, 85, 247, 0.1);
+  color: #d946ef;
+  border: 1px solid rgba(217, 70, 239, 0.3);
+  font-family: monospace;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.badgeExtra {
+  background: rgba(255, 255, 255, 0.05);
+  color: #d1d5db;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: monospace;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 16px;
+}
+
+.socialIcon {
+  color: #9ca3af;
+  transition: color 0.3s;
+}
+
+.socialIcon:hover {
+  color: #a78bfa;
+}
+
+
+/* =========================================
+   3. FOUNDER SECTION (Sobre el fundador)
+   ========================================= */
+.founderSection {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto 120px;
+  padding: 0 20px;
+}
+
+.founderBox {
+  background: linear-gradient(145deg, #121820 0%, #0a0d14 100%);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 16px;
+  padding: 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Resplandor morado de fondo */
+.founderBox::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.founderTitle {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+.founderDesc {
+  color: #d1d5db;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.founderQuote {
+  border-left: 4px solid #d946ef;
+  padding-left: 20px;
+  margin: 30px 0;
+}
+
+.founderQuote p {
+  color: #ffffff;
+  font-family: monospace;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.founderButtons {
+  display: flex;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.btnOutline {
+  background: transparent;
+  color: #d1d5db;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btnOutline:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .founderBox {
+    padding: 30px 20px;
+  }
+  .founderTitle {
+    font-size: 1.8rem;
+  }
+}
+
+
+/* =========================================
+   4. CTA SECTION (Únete a la comunidad)
+   ========================================= */
+.ctaSection {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 100px;
+  padding: 0 20px;
+}
+
+.ctaCard {
+  /* Fondo morado refinado con la cuadrícula estilo blueprint */
+  background-color: #a855f7; 
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  border-radius: 12px;
+  padding: 60px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  box-shadow: 0 20px 40px rgba(124, 144, 255, 0.3);
+}
+
+.ctaContent {
+  flex: 1;
+}
+
+.ctaCode {
+  font-family: 'Fira Code', monospace;
+  font-size: 1rem;
+  color: #0b0e14;
+  margin-bottom: 24px;
+  display: block;
+  letter-spacing: -0.5px;
+}
+
+.ctaCodeBold {
+  font-weight: 800;
+  color: #64dfac;
+}
+
+.ctaTitle {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 900;
+  color: #f1fff4; /* Texto en un tono oscuro profundo para contraste perfecto */
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.ctaCursor {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.9em;
+  background-color: #ffffff; /* Cursor blanco brillante sobre el fondo morado */
+  vertical-align: baseline;
+  margin-left: 8px;
+  animation: cursorBlink 1s step-end infinite;
+}
+
+.ctaDesc {
+  color: #E0E0E0; /* Tono morado muy oscuro para máxima legibilidad */
+  font-size: 1.15rem;
+  line-height: 1.6;
+  max-width: 600px;
+  font-weight: 600; /* Letras más estilizadas y marcadas */
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Lado Derecho - Botones */
+.ctaButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 260px;
+}
+
+.btnMeetup {
+  background-color: #0b0e14;
+  color: #ffffff;
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: system-ui, -apple-system, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btnMeetup:hover {
+  background-color: #1a202c;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+}
+
+.btnWhatsapp {
+  background-color: transparent;
+  color: #ffffff; /* Texto e icono blancos */
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Borde blanco semitransparente */
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: system-ui, -apple-system, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btnWhatsapp:hover {
+  background-color: rgba(4, 196, 154, 0.637);
+  border-color: #3bff6c;
+  transform: translateY(-2px);
+}
+
+/* Responsividad para móviles y tablets */
+@media (max-width: 900px) {
+  .ctaCard {
+    flex-direction: column;
+    padding: 40px 30px;
+    align-items: flex-start;
+  }
+  .ctaButtons {
+    width: 100%;
+  }
+  .btnMeetup, .btnWhatsapp {
+    width: 100%;
+  }
+}
+
+
+

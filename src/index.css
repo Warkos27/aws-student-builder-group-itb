@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0a0d14; /* Fondo oscuro profundo */
+  color: #ffffff;
+  font-family: system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Evitamos que el scroll horizontal se rompa por las animaciones */
+html {
+  overflow-x: hidden;
+}

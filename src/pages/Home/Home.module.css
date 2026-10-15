@@ -1,0 +1,1603 @@
+.homeContainer {
+  width: 100%;
+  background-color: #07090e;
+  overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* NUEVO: Contenedor exclusivo para la primera pantalla (Hero) */
+.heroSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* Limita esta sección al tamaño de la pantalla */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centra el contenido verticalmente */
+  overflow: hidden; /* Corta la cuadrícula y constelaciones para que no bajen */
+  padding-top: 70px; /* Compensa el espacio del Navbar fijo */
+}
+
+/* 1. Cuadrícula y Luces (Fondo) */
+.gridCyber {
+  position: absolute;
+  inset: 0;
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 153, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 85, 0, 0.05) 1px, transparent 1px);
+  z-index: 0;
+}
+
+.glowTop {
+  position: absolute;
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  height: 700px;
+  /* Opacidad reducida del 28% al 12% para un brillo sutil */
+  background: radial-gradient(circle, rgba(255, 85, 0, 0.12) 0%, rgba(255, 153, 0, 0.05) 42%, transparent 72%);
+  filter: blur(85px);
+  z-index: 1;
+}
+
+.glowLeft {
+  position: absolute;
+  top: 25%;
+  left: -10%;
+  width: 650px;
+  height: 650px;
+  /* Opacidad reducida al 8% */
+  background: radial-gradient(circle, rgba(255, 46, 46, 0.08) 0%, rgba(255, 153, 0, 0.04) 45%, transparent 75%);
+  filter: blur(100px);
+  z-index: 1;
+}
+
+.glowRight {
+  position: absolute;
+  top: 30%;
+  right: -10%;
+  width: 700px;
+  height: 700px;
+  /* Opacidad reducida al 10% */
+  background: radial-gradient(circle, rgba(255, 153, 0, 0.10) 0%, rgba(255, 46, 46, 0.05) 50%, transparent 75%);
+  filter: blur(105px);
+  z-index: 1;
+}
+
+/* 2. Constelaciones Flotantes Transparentes */
+.constellations {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.floatingCard {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Reducido de 10px a 8px */
+  opacity: 0.55; 
+  transition: opacity 0.3s ease;
+  pointer-events: auto; 
+  cursor: default;
+}
+
+.floatingCard:hover {
+  opacity: 1; 
+}
+
+/* Las 4 originales */
+.pos1 { top: 22%; left: 8%; }
+.pos2 { top: 18%; right: 10%; }
+.pos3 { bottom: 28%; left: 12%; }
+.pos4 { bottom: 26%; right: 14%; }
+
+/* Las 5 nuevas */
+.pos5 { top: 40%; left: 4%; }
+.pos6 { top: 50%; right: 5%; }
+.pos7 { top: 10%; left: 40%; } 
+.pos8 { bottom: 12%; left: 30%; } 
+.pos9 { bottom: 15%; right: 35%; } 
+
+.animSlow { animation: floatSlow 7s ease-in-out infinite; }
+.animReverse { animation: floatReverse 9s ease-in-out infinite; }
+.animFast { animation: floatFast 6s ease-in-out infinite; }
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(3deg); }
+}
+@keyframes floatReverse {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(14px) rotate(-3deg); }
+}
+@keyframes floatFast {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-22px) scale(1.05); }
+}
+
+/* Textos flotantes más pequeños */
+.textYellow { color: #ff9900; font-family: monospace; font-weight: bold; font-size: 0.75rem; }
+.textWhite { color: #ffffff; font-family: monospace; font-weight: bold; font-size: 0.85rem; }
+.textGray { color: #d1d5db; font-family: monospace; font-weight: bold; font-size: 0.75rem; }
+
+/* 3. Contenido Central */
+.heroCenter {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 1000px; /* Reducido para contener mejor el texto */
+  padding: 0 20px;
+  margin-bottom: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Chip Central Animado (Escalado hacia abajo) --- */
+.chipWrapper {
+  position: relative;
+  margin-bottom: 20px; /* Reducido de 30px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chipGlow {
+  position: absolute;
+  width: 80px; /* Reducido de 100px */
+  height: 80px; /* Reducido de 100px */
+  background: rgba(255, 153, 0, 0.4);
+  border-radius: 50%;
+  filter: blur(20px);
+  transition: all 0.3s;
+  z-index: 1;
+}
+
+.chipWrapper:hover .chipGlow {
+  filter: blur(30px);
+  background: rgba(255, 153, 0, 0.6);
+}
+
+.chipImg {
+  position: relative;
+  width: 70px;  /* Reducido de 82px */
+  height: 70px; /* Reducido de 82px */
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px rgba(255, 153, 0, 0.9));
+  animation: spin 10s linear infinite; 
+  z-index: 2;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Íconos de servicios más compactos */
+.awsIcon {
+  width: 24px; /* Reducido de 28px */
+  height: 24px;
+  object-fit: contain;
+  border-radius: 6px; 
+}
+
+/* Textos y Etiquetas Centrales */
+.chapterTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 14px; /* Reducido */
+  border-radius: 999px;
+  background: rgba(255, 153, 0, 0.1);
+  border: 1px solid rgba(255, 153, 0, 0.3);
+  margin-bottom: 0px;
+}
+
+.pingDot {
+  width: 6px; /* Ligeramente más pequeño */
+  height: 6px;
+  background-color: #ff9900;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ff9900;
+}
+
+.chapterText {
+  color: #ff9900;
+  font-size: 0.75rem; /* Reducido de 0.85rem */
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+
+
+/*EMPIEZA DESDE AQUI*/
+
+/* Definimos la animación de aparición desde abajo (Más suave y fluida) */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(20px); } /* Distancia más corta para evitar brusquedad */
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.mainTitle {
+  font-size: clamp(1.8rem, 6vw, 3.2rem); /* <-- Cambio importante aquí */
+  font-weight: 800;
+  line-height: 1.1;
+  color: #ffffff;
+  margin-bottom: 20px;
+  /* Permitimos que el texto pase a la siguiente línea si es necesario en móviles */
+  white-space: normal; /* <-- Cambio importante (antes era nowrap) */
+  /* Animación suavizada */
+  opacity: 0;
+  animation: fadeUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.2s; 
+}
+
+.fireText {
+  background: linear-gradient(135deg, #FFB800 0%, #FF6000 50%, #FF2E2E 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 35px rgba(255, 85, 0, 0.35));
+}
+
+.subtitle {
+  color: #d1d5db;
+  font-size: 1rem; 
+  line-height: 1.6;
+  margin-bottom: 32px; 
+  max-width: 540px; 
+  /* Animación suavizada */
+  opacity: 0;
+  animation: fadeUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.4s; /* Aparece suavemente después del título */
+}
+
+/* Botones con animación en cascada */
+.buttonGroup {
+  display: flex;
+  gap: 16px; 
+  justify-content: center;
+  /* Aplicamos la misma animación suave a los botones */
+  opacity: 0;
+  animation: fadeUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.6s; /* Aparecen de últimos */
+
+  flex-wrap: wrap; 
+  width: 100%;
+}
+
+
+/*TERMINA AQUI*/
+.btnPrimary {
+  position: relative;
+  background: transparent;
+  color: #ff9900; 
+  border: 2px solid #ff9900; 
+  padding: 12px 28px; /* Reducido de 16px 32px */
+  border-radius: 4px; 
+  font-weight: 800;
+  font-size: 0.9rem; /* Reducido de 1rem */
+  cursor: pointer;
+  overflow: hidden; 
+  transition: color 0.4s ease, border-color 0.4s ease;
+  z-index: 1;
+}
+
+.btnPrimary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #FFB800, #FF3823); 
+  z-index: -1;
+  transform: scaleX(0); 
+  transform-origin: left; 
+  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1); 
+}
+
+.btnPrimary:hover {
+  color: #000000; 
+  border-color: transparent; 
+  box-shadow: 0 0 25px rgba(255, 136, 0, 0.4); 
+}
+
+.btnPrimary:hover::before {
+  transform: scaleX(1); 
+}
+
+.btnSecondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border: 1px solid rgba(255, 85, 0, 0.4);
+  padding: 12px 28px; /* Reducido de 16px 32px */
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem; /* Reducido de 1rem */
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s;
+}
+
+.btnSecondary:hover { border-color: #ff9900; background: rgba(255, 255, 255, 0.1); }
+
+/* --- RESPONSIVE PARA EL HERO --- */
+@media (max-width: 768px) {
+  .heroCenter {
+    padding: 0 15px; /* Reducimos padding lateral en celulares */
+  }
+  
+  .btnPrimary, .btnSecondary {
+    width: 100%; /* Los botones ocuparán todo el ancho */
+    text-align: center;
+  }
+}
+
+
+
+/* 4. Marquee (Cinta Infinita) */
+.marqueeWrapper {
+  position: absolute; /* Cambiado a absolute para pegarse al fondo del heroSection */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(18, 22, 34, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 16px 0; 
+  z-index: 10;
+}
+
+.marqueeTrack {
+  display: flex;
+  width: 200%;
+  animation: marquee 25s linear infinite; /* Tiempo de la animación de deslizamiento */
+}
+
+.marqueeGroup {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0; 
+  gap: 50px; /* 1. Aumenta este valor para separar todos los elementos uniformemente */
+}
+
+
+/* Estilo para los iconos Pixel Art */
+.mqIcon {
+  height: 24px; 
+  width: auto;
+  object-fit: contain;
+  image-rendering: pixelated; 
+  flex-shrink: 0; /* Obligatorio: prohíbe que el navegador aplaste la imagen */
+  margin: 0 20px; /* 2. Agrega un margen extra a la izquierda y derecha de cada PNG */
+  opacity: 0.85;
+  transition: opacity 0.3s, transform 0.2s;
+}
+
+.mqIcon:hover {
+  opacity: 1;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.mqTagOrange, .mqTagYellow, .mqTagRed, .mqTagWhite {
+  font-family: monospace;
+  font-size: 0.8rem; /* Reducido de 0.85rem */
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.mqTagOrange { background: rgba(255, 85, 0, 0.1); color: #FF5500; border: 1px solid rgba(255, 85, 0, 0.3); }
+.mqTagYellow { background: rgba(255, 153, 0, 0.1); color: #FF9900; border: 1px solid rgba(255, 153, 0, 0.3); }
+.mqTagRed { background: rgba(255, 46, 46, 0.1); color: #FF2E2E; border: 1px solid rgba(255, 46, 46, 0.3); }
+.mqTagWhite { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); }
+
+
+/* --- Nuevas Secciones de Contenido --- */
+.contentSection {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto; /* <--- ESTA ES LA LÍNEA CLAVE PARA CENTRAR */
+  padding: 100px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+.sectionTitle {
+  color: #ffffff;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.sectionTitle span {
+  color: #ff9900;
+}
+
+.sectionSubtitle {
+  color: #9ca3af;
+  text-align: center;
+  max-width: 700px;
+  margin-bottom: 60px;
+  line-height: 1.6;
+}
+
+/* Grid de Tarjetas (Como en tu referencia) */
+/* Grid de Tarjetas (Centrado y ajustado) */
+.gridCards {
+  display: grid;
+  /* El auto-fit con max-width garantiza que se centren si sobran espacios */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 350px));
+  justify-content: center; /* Alineación al centro fundamental */
+  gap: 24px;
+  width: 100%;
+}
+
+.card {
+  background: rgba(20, 24, 34, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 40px 32px;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efectos Base del Hover (El color se define por tarjeta abajo) */
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.cardIconWrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+  /* Fondo por defecto sutil */
+  background: rgba(255, 255, 255, 0.03); 
+}
+
+.cardIcon {
+  width: 26px;
+  height: 26px;
+  transition: all 0.3s ease;
+  /* Color de línea por defecto sutil */
+  stroke: rgba(255, 255, 255, 0.5); 
+}
+
+.card:hover .cardIcon {
+  transform: scale(1.15);
+  animation: svgPulse 1.5s infinite;
+}
+
+@keyframes svgPulse {
+  0% { filter: drop-shadow(0 0 0px currentColor); }
+  50% { filter: drop-shadow(0 0 10px currentColor); }
+  100% { filter: drop-shadow(0 0 0px currentColor); }
+}
+
+/* --- CLASES ESPECÍFICAS DE COLOR POR TARJETA --- */
+
+/* Tarjeta 1: Violeta (#a78bfa) */
+.cardViolet:hover {
+  border-color: rgba(167, 139, 250, 0.4);
+  background: rgba(167, 139, 250, 0.03);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(167, 139, 250, 0.05);
+}
+.cardViolet .cardIconWrapper { background: rgba(167, 139, 250, 0.1); }
+.cardViolet .cardIcon { stroke: #a78bfa; }
+.cardViolet:hover .cardIconWrapper { background: rgba(167, 139, 250, 0.15); }
+
+/* Tarjeta 2: Naranja/Amarillo (#ff9900) */
+.cardOrange:hover {
+  border-color: rgba(255, 153, 0, 0.4);
+  background: rgba(255, 153, 0, 0.03);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 153, 0, 0.05);
+}
+.cardOrange .cardIconWrapper { background: rgba(255, 153, 0, 0.1); }
+.cardOrange .cardIcon { stroke: #ff9900; }
+.cardOrange:hover .cardIconWrapper { background: rgba(255, 153, 0, 0.15); }
+
+/* Tarjeta 3: Turquesa/Verde Claro (#34d399) */
+.cardTeal:hover {
+  border-color: rgba(52, 211, 153, 0.4);
+  background: rgba(52, 211, 153, 0.03);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(52, 211, 153, 0.05);
+}
+.cardTeal .cardIconWrapper { background: rgba(52, 211, 153, 0.1); }
+.cardTeal .cardIcon { stroke: #34d399; }
+.cardTeal:hover .cardIconWrapper { background: rgba(52, 211, 153, 0.15); }
+
+/* --- FIN CLASES ESPECÍFICAS --- */
+
+.cardTitle {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  font-family: monospace;
+}
+
+.cardText {
+  color: #9ca3af;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+
+
+/* --- Sección Evento Full Width con Escáner --- */
+.fullWidthEvent {
+  position: relative;
+  width: 100%;
+  height: auto; /* <-- IMPORTANTE: Permite que la altura dependa 100% de la imagen */
+  overflow: hidden;
+  display: flex;
+  background: #000;
+  margin-bottom: 40px; 
+}
+
+.fullWidthImage {
+  width: 100%;
+  height: auto; /* <-- IMPORTANTE: Mantiene la proporción original sin recortar nada */
+  display: block; /* Elimina márgenes fantasma debajo de la imagen */
+  filter: brightness(0.7) contrast(1.1); 
+}
+/* Animación de Escáner Suave (Línea fucsia/violeta) */
+.scannerLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #d946ef; /* Color fucsia de la referencia */
+  box-shadow: 0 0 15px 4px rgba(217, 70, 239, 0.5); /* Resplandor */
+  z-index: 2;
+  animation: scan 5s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+}
+
+@keyframes scan {
+  0% { top: 5%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 90%; opacity: 0; }
+}
+
+/* Barra inferior estilo terminal */
+.eventBottomBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #0b0e14; /* Fondo sólido muy oscuro */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 14px 6%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  z-index: 3;
+}
+
+/* Puntito de color como en la imagen */
+.eventDot {
+  width: 6px;
+  height: 6px;
+  background-color: #f43f5e; /* Rojo/Rosa */
+  border-radius: 50%;
+  box-shadow: 0 0 8px #f43f5e;
+}
+
+.eventText {
+  color: #6b7280; /* Gris sutil */
+  font-family: monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.eventTextHighlight {
+  color: #a78bfa; /* Violeta claro para resaltar el nombre */
+  font-family: monospace;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive para la barra inferior en celulares */
+@media (max-width: 768px) {
+  .eventBottomBar {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 4%;
+  }
+}
+
+/*ANTE1*/
+
+/* --- Sección Evento Full Width con Escáner --- */
+.fullWidthEvent {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  
+  /* Dejamos que la altura sea automática, sin cortes bruscos */
+  height: auto; 
+  overflow: hidden;
+  
+  /* IMPORTANTE: Cambiamos flex por block para que el truco del recorte funcione */
+  display: block; 
+  background: #000;
+  margin-bottom: 40px; 
+}
+
+.fullWidthImage {
+  width: 100%;
+  height: auto; /* Mantiene la proporción original de pies a cabeza */
+  display: block;
+  
+  /* EL TRUCO MAGICO: Tira de la imagen hacia arriba un 10%. 
+     Al estar el contenedor en overflow:hidden, el techo desaparece de 
+     la pantalla suavemente sin aplastar la foto. 
+     Puedes subirlo a -15% o bajarlo a -5% si quieres cortar más o menos techo. */
+  margin-top: -20%; 
+  
+  filter: brightness(0.7) contrast(1.1); 
+}
+
+/* Animación de Escáner Suave (Línea fucsia/violeta) */
+.scannerLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #d946ef; /* Color fucsia de la referencia */
+  box-shadow: 0 0 15px 4px rgba(217, 70, 239, 0.5); /* Resplandor */
+  z-index: 2;
+  animation: scan 5s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+}
+
+@keyframes scan {
+  0% { top: 5%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 90%; opacity: 0; }
+}
+
+/* Barra inferior estilo terminal */
+.eventBottomBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #0b0e14; /* Fondo sólido muy oscuro */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 14px 6%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  z-index: 3;
+}
+
+/* Puntito de color como en la imagen */
+.eventDot {
+  width: 6px;
+  height: 6px;
+  background-color: #f43f5e; /* Rojo/Rosa */
+  border-radius: 50%;
+  box-shadow: 0 0 8px #f43f5e;
+}
+
+.eventText {
+  color: #6b7280; /* Gris sutil */
+  font-family: monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.eventTextHighlight {
+  color: #a78bfa; /* Violeta claro para resaltar el nombre */
+  font-family: monospace;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive para la barra inferior en celulares */
+@media (max-width: 768px) {
+  .eventBottomBar {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 4%;
+  }
+}
+
+
+
+/* --- Sección: ¿Por qué unirte? (Beneficios) --- */
+.benefitsSection {
+  width: 100%;
+  max-width: 1200px;
+  margin: 60px auto 100px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.benefitsHeader {
+  margin-bottom: 40px;
+  text-align: left; /* Alineado a la izquierda según la referencia */
+}
+
+.benefitsTag {
+  color: #6b7280;
+  font-family: monospace;
+  font-size: 0.85rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.benefitsTitle {
+  color: #ffffff;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.benefitsDesc {
+  color: #9ca3af;
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+/* Grid de Beneficios (3 columnas) */
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.benefitCard {
+  background: rgba(20, 24, 34, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: all 0.3s ease;
+}
+
+.benefitCard:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-4px);
+}
+
+.benefitIconWrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid;
+}
+
+.benefitIconWrapper svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Colores específicos para los iconos según la referencia */
+.iconYellow {
+  background: rgba(250, 204, 21, 0.05);
+  border-color: rgba(250, 204, 21, 0.2);
+  color: #facc15;
+}
+
+.iconOrange {
+  background: rgba(249, 115, 22, 0.05);
+  border-color: rgba(249, 115, 22, 0.2);
+  color: #f97316;
+}
+
+.iconPurple {
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.3);
+  color: #a855f7;
+  /* El icono morado de la última tarjeta tiene el fondo relleno en la referencia */
+  background: #a855f7; 
+  color: #ffffff;
+  border: none;
+  border-radius: 50%; /* Icono circular para destacar */
+}
+
+.benefitContent h4 {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: monospace;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.benefitContent p {
+  color: #9ca3af;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Tarjeta de ancho completo al final */
+.benefitFullCard {
+  grid-column: 1 / -1; /* Obliga a la tarjeta a ocupar todas las columnas disponibles */
+  background: rgba(168, 85, 247, 0.05); /* Tinte morado sutil de fondo */
+  border: 1px solid rgba(168, 85, 247, 0.2); /* Borde morado */
+  align-items: center; /* Centra el icono verticalmente con el texto */
+}
+
+.benefitFullCard:hover {
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.4);
+}
+
+
+
+/* --- NUEVA SECCIÓN HERO: ESTILO AWS ECUADOR --- */
+
+.customHeroSection {
+  --line: rgba(255, 255, 255, 0.1); 
+  --purple: #BF80FF;
+  --pink: #FF57E9;
+  --text: #F9F9FA;
+  --text-2: #AEB6C2;
+  
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 20px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  background-color: transparent; 
+  z-index: 10;
+  position: relative;
+}
+
+/* Columna Izquierda */
+.heroContentLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.customTitle {
+  font-family: var(--font-sans, 'Geist', sans-serif);
+  font-size: clamp(2.5rem, 4.5vw, 4rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.textPurple { color: var(--purple); }
+
+.customDesc {
+  font-family: var(--font-sans, 'Geist', sans-serif);
+  font-size: 1.1rem;
+  color: var(--text-2);
+  line-height: 1.8;
+  max-width: 95%;
+}
+
+.textWhite { color: var(--text); font-weight: bold; }
+
+.blinkingCursor {
+  display: inline-block;
+  width: 0.4em; /* Ancho del rectángulo */
+  height: 0.9em; /* Alto del rectángulo */
+  background-color: var(--pink); /* Color fucsia/morado de tu referencia */
+  vertical-align: baseline; /* Alineado con el texto */
+  margin-left: 8px;
+  animation: cursorBlink 1s step-end infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Botones */
+.customButtonGroup {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+/* --- Sintaxis del Código Estilo Editor --- */
+.codeTerminal {
+  font-family: var(--font-mono, 'Geist Mono', monospace);
+  font-size: 0.95rem;
+  background: rgba(0, 0, 0, 0.4); /* Fondo oscuro para resaltar las letras */
+  padding: 8px 16px;
+  border-radius: 6px;
+  display: inline-block;
+  width: fit-content;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.codeIf { color: #818CF8; } /* Azul/Morado */
+.codeVar { color: #F9F9FA; } /* Blanco */
+.codeFunc { color: #FF57E9; } /* Fucsia */
+.codePunct { color: #AEB6C2; } /* Gris */
+.codeString { color: #FACC15; } /* Tono amarillo solicitado */
+
+
+
+/* --- Botón Meetup Animación Suave con PNG --- */
+.btnMeetup {
+  background-color: var(--text); /* Fondo blanco por defecto */
+  color: #121820; /* Texto oscuro */
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-family: var(--font-sans, 'Geist', sans-serif);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  /* Transición de 0.4s para el cambio de color */
+  transition: background-color 0.4s ease, color 0.4s ease, transform 0.2s, box-shadow 0.2s;
+}
+
+.btnMeetup:hover {
+  background-color: var(--purple); /* Cambia suavemente a morado */
+  color: #FFFFFF; /* El texto pasa a blanco */
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(191, 128, 255, 0.4);
+}
+
+.meetupImg {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+/* Pequeño rebote en el logo al pasar el mouse */
+.btnMeetup:hover .meetupImg {
+  transform: scale(1.15) rotate(-3deg);
+}
+
+@keyframes scanVibration {
+  0% { left: -100%; }
+  15% { left: 200%; } /* Atraviesa rápidamente el botón */
+  100% { left: 200%; } /* Espera inactiva el resto del tiempo */
+}
+
+.btnSolidPurple:hover { transform: scale(1.05); }
+
+.btnOutlineGray {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid var(--line);
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-family: var(--font-sans, 'Geist', sans-serif);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.btnOutlineGray:hover { border-color: var(--text-2); }
+
+/* --- Cuadrícula de Métricas Perfecta --- */
+.metricsGridBox {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Obliga a crear 4 columnas en 1 fila */
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  margin-top: 25px;
+  width: 100%; /* Usa todo el ancho disponible de la columna */
+  background: rgba(255, 255, 255, 0.02); 
+}
+
+.metricCell {
+  padding: 16px 20px; /* Padding ligeramente ajustado para que quepan las 4 celdas */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+
+.metricNumPurple { color: var(--purple); font-size: 1.8rem; font-weight: 800; font-family: var(--font-mono, monospace); }
+.metricNumPink { color: var(--pink); font-size: 1.8rem; font-weight: 800; font-family: var(--font-mono, monospace); }
+.metricNumWhite { color: var(--text); font-size: 1.8rem; font-weight: 800; font-family: var(--font-mono, monospace); }
+.metricTextWhite { color: var(--text); font-size: 1rem; font-weight: 800; font-family: var(--font-mono, monospace); line-height: 1.3; }
+
+.metricLabel {
+  color: var(--text-2);
+  font-family: var(--font-mono, 'Geist Mono', monospace);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+  .metricsGridBox {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+/* --- Columna Derecha: Contenedor del SVG --- */
+.heroContentRight {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.pixelArtContainer {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 1 / 1;
+  background-color: rgba(10, 14, 20, 0.6); 
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Fondo cuadriculado estilo software de diseño */
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 5% 5%; /* Asegura que la cuadrícula empate con el SVG */
+}
+
+/* El SVG escala perfectamente sin desenfocarse */
+.pixelSvg {
+  width: 85%;
+  height: 85%;
+  z-index: 2;
+}
+
+/* --- ANIMACIONES DEL SVG --- */
+
+/* 1. El monumento flota suavemente */
+.monumentFloat {
+  animation: floatSvg 6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes floatSvg {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1px); } /* Movimiento sutil en pixel art */
+}
+
+/* 2. Parpadeo de las estrellas de colores (Como en el video) */
+.starBlink1 { animation: blink 3s infinite alternate; }
+.starBlink2 { animation: blink 4s infinite alternate-reverse; }
+.starBlink3 { animation: blink 2.5s infinite alternate; }
+
+@keyframes blink {
+  0%, 20% { opacity: 0.2; transform: scale(0.9); }
+  80%, 100% { opacity: 1; transform: scale(1.1); }
+}
+
+/* 3. Llama de las antorchas titilando */
+.fireFlicker {
+  animation: flicker 0.4s infinite alternate;
+  transform-origin: center bottom;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.8; transform: scaleY(0.9); }
+  100% { opacity: 1; transform: scaleY(1.1); }
+}
+
+/* --- Etiquetas inferiores --- */
+.pixelArtLabels {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono, 'Geist Mono', monospace);
+  font-size: 0.75rem;
+  z-index: 3;
+}
+
+.coordColor { color: var(--pink); }
+.fileColor { color: var(--text-2); }
+
+/* Responsive */
+@media (max-width: 968px) {
+  .customHeroSection {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .heroContentRight {
+    justify-content: center;
+  }
+}
+
+
+/* =========================================
+   SECCIÓN GALERÍA DE MOMENTOS
+   ========================================= */
+
+.gallerySection {
+  width: 100%;
+  max-width: 1200px;
+  margin: 60px auto 100px; 
+  padding: 0 20px;
+  z-index: 10;
+  position: relative;
+}
+
+.galleryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.galleryTitleBox {
+  flex: 1;
+}
+
+.momentosTag {
+  color: #a78bfa; 
+  font-family: var(--font-mono, 'Geist Mono', monospace);
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.galleryTitle {
+  color: #ffffff;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.galleryDesc {
+  flex: 1;
+  color: #9ca3af;
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+.galleryTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.tabBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #9ca3af;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-family: var(--font-mono, 'Geist Mono', monospace);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tabBtn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.activeTab {
+  background-color: #a855f7 !important;
+  color: #ffffff !important;
+  border-color: #a855f7 !important;
+  font-weight: bold;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 240px; /* Mantiene la altura fija de los bloques base */
+  gap: 20px;
+  grid-auto-flow: dense;
+}
+
+.galleryItem {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #121820; 
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+/* MAGIA 1: Para fotos VERTICALES (Ocupan 2 bloques hacia abajo) */
+.itemTall {
+  grid-row: span 2; 
+}
+
+/* MAGIA 2: Para fotos PANORÁMICAS/HORIZONTALES (Ocupan 2 bloques hacia los lados) */
+.itemWide {
+  grid-column: span 2; 
+}
+
+/* MAGIA 3: Para una foto GIGANTE (2x2) */
+.itemLarge {
+  grid-row: span 2;
+  grid-column: span 2;
+}
+
+.galleryItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* El recorte original que te gustaba */
+  transition: transform 0.5s ease, filter 0.3s ease;
+  filter: brightness(0.8);
+}
+
+.galleryItem:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.imgLabel {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(10, 14, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  font-family: var(--font-mono, 'Geist Mono', monospace);
+  padding: 6px 12px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  pointer-events: none; 
+}
+
+@media (max-width: 900px) {
+  .galleryHeader {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .galleryGrid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 200px;
+  }
+  .itemLarge {
+    grid-row: span 1; 
+  }
+  .galleryTabs {
+    gap: 8px;
+  }
+  .tabBtn {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+}
+
+
+/* --- RESPONSIVE PARA LA GALERÍA --- */
+@media (max-width: 900px) {
+  .galleryHeader {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+  }
+}
+
+@media (max-width: 600px) {
+  .galleryGrid {
+    /* 👇 ESTE ES EL CAMBIO PRINCIPAL PARA TU SOLICITUD 👇 */
+    grid-template-columns: repeat(2, 1fr); /* FORZAMOS 2 columnas en celulares también */
+    grid-auto-rows: 150px; /* Reducimos la altura base para que las fotos no sean tan largas */
+    gap: 10px; /* Reducimos el espacio entre fotos en celular */
+  }
+  
+  /* Ajustamos cómo se comportan las fotos grandes/anchas en celular */
+  .itemLarge {
+    grid-row: span 1;
+    grid-column: span 2; /* Que ocupe todo el ancho, pero no tanta altura */
+  }
+  
+  .itemWide {
+    grid-column: span 2; /* Mantiene su ancho de 2 columnas */
+  }
+  
+  .itemTall {
+     grid-row: span 1; /* Quitamos la doble altura en celulares para que cuadre mejor */
+  }
+
+  .galleryTabs {
+    gap: 8px;
+  }
+  
+  .tabBtn {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+  
+  .imgLabel {
+    /* Hacemos la etiqueta más pequeña y discreta en móviles */
+    font-size: 0.65rem;
+    padding: 4px 8px;
+    bottom: 8px;
+    left: 8px;
+  }
+}
+
+
+/* --- Mensaje "Muy Pronto" para pestañas vacías --- */
+.soonContainer {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18, 24, 32, 0.4);
+  border: 2px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+.soonText {
+  color: #a78bfa; /* Morado claro */
+  font-family: var(--font-mono, 'Geist Mono', monospace);
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* =========================================
+   SECCIÓN FAQ (PREGUNTAS FRECUENTES)
+   ========================================= */
+
+.faqSection {
+  width: 100%;
+  max-width: 1200px;
+  margin: 60px auto 100px;
+  padding: 0 20px;
+  z-index: 10;
+  position: relative;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr; /* Columna derecha más ancha */
+  gap: 60px;
+  align-items: flex-start;
+}
+
+/* El texto de la izquierda se queda pegado al hacer scroll */
+.faqLeft {
+  position: sticky;
+  top: 120px; 
+}
+
+.faqTag {
+  color: #6b7280;
+  font-family: var(--font-mono, 'Geist Mono', monospace);
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.faqTitle {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.textPurple {
+  color: #a855f7;
+}
+
+.faqDesc {
+  color: #9ca3af;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  max-width: 90%;
+}
+
+.faqCount {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b7280;
+  font-family: var(--font-mono, 'Geist Mono', monospace);
+  font-size: 0.85rem;
+}
+
+.faqRight {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faqItem {
+  background: rgba(18, 24, 32, 0.4); /* Fondo oscuro sutil */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faqItem:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Estilos cuando la pregunta está abierta */
+.open {
+  background: rgba(168, 85, 247, 0.03);
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+.faqHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-family: var(--font-mono, 'Geist Mono', monospace);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faqIcon {
+  width: 28px;
+  height: 28px;
+  background: rgba(168, 85, 247, 0.1);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a855f7;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+/* El icono cambia a color sólido cuando está abierto */
+.open .faqIcon {
+  background: #a855f7;
+  color: #ffffff;
+}
+
+/* Animación mágica con CSS Grid para desplegar la respuesta */
+.faqAnswerWrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-out;
+}
+
+.open .faqAnswerWrapper {
+  grid-template-rows: 1fr; /* Revela el contenido */
+}
+
+.faqAnswerInner {
+  overflow: hidden;
+}
+
+.faqAnswerText {
+  padding: 0 24px 24px 68px; /* Margen izquierdo alineado con el texto, saltando el icono */
+  color: #9ca3af;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Responsividad para móviles */
+@media (max-width: 900px) {
+  .faqGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .faqLeft {
+    position: relative;
+    top: 0;
+  }
+  .faqAnswerText {
+    padding: 0 20px 20px 20px; /* Centra el texto en celular */
+  }
+}
+
+/* =========================================
+   REFINAMIENTOS RESPONSIVE PARA MÓVIL (TARJETAS)
+   ========================================= */
+@media (max-width: 640px) {
+  /* 1. Apilamos el contenido de la cabecera verticalmente */
+  .certCardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px; 
+    gap: 16px;
+  }
+  
+  /* 2. Reducimos el tamaño del icono y el espacio para que respire el texto */
+  .certLeft {
+    width: 100%;
+    gap: 12px; 
+  }
+  
+  .certBadge {
+    width: 50px; 
+    height: 50px;
+  }
+  
+  .certTitle {
+    font-size: 1.1rem; 
+    line-height: 1.3;
+  }
+  
+  /* 3. Los botones toman el 100% del ancho para ser fáciles de presionar */
+  .btnIniciar, 
+  .btnCerrar, 
+  .btnProximamente {
+    width: 100%;
+    text-align: center;
+    padding: 12px; /* Un poco más de altura para el toque táctil */
+  }
+
+  /* 4. Ajustes al formulario Call For Speakers en celulares */
+  .cfpBanner {
+    padding: 24px 16px; /* Menos padding lateral para no apretar los inputs */
+  }
+}

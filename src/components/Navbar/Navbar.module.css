@@ -1,0 +1,332 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Aumentamos el padding lateral de 40px a 6% para alejarlo de las esquinas */
+  padding: 0 6%;
+  background: rgba(15, 18, 25, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+/* --- Logo --- */
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Ligeramente más separado del texto */
+  cursor: pointer;
+}
+
+.logoImg {
+  width: 40px; /* Un poco más grande para equilibrar */
+  height: 40px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.logoTextStack {
+  font-family: monospace;
+  display: flex;
+  flex-direction: column; /* Esto obliga a que el texto se apile uno sobre otro */
+  justify-content: center;
+  line-height: 1.2; /* Reduce el espacio entre la línea de arriba y la de abajo */
+}
+
+/* Línea principal: AWS Student Builder Group */
+.topText {
+  color: #ffffff;
+  font-weight: 800; /* Recupera tu negrita original */
+  font-size: 1.1rem;
+  font-family: inherit; /* Usa la fuente estándar de tu web, no la de código */
+}
+
+/* Subtítulo: Universidad ITB */
+.bottomText {
+  color: #9ca3af; /* Gris claro para el nombre de la universidad */
+  font-weight: 500;
+  font-size: 0.85rem;
+  font-family: inherit; 
+}
+
+
+
+.textWhite { color: #ffffff; font-weight: 800; }
+.textOrange { color: #ff9900; font-weight: 800; }
+
+/* --- Navegación --- */
+.navLinks {
+  display: flex;
+  gap: 20px; /* Reducimos un poco el gap porque el link tendrá padding interno */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  color: #9ca3af;
+  text-decoration: none;
+  font-family: monospace;
+  font-size: 0.95rem;
+  font-weight: 500;
+  position: relative;
+  padding: 8px 16px; /* Añadimos espacio interno para el efecto de resplandor */
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+
+/* Efecto de fondo iluminado al deslizar el mouse */
+.link:hover, .active {
+  color: #ff9900;
+  background: rgba(255, 153, 0, 0.08); /* Resplandor suave de fondo */
+  text-shadow: 0 0 12px rgba(255, 153, 0, 0.4);
+}
+
+
+/* Línea de subrayado invisible por defecto */
+.link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff9900;
+  transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Efecto al pasar el mouse o estar activo */
+.link:hover, .active {
+  color: #ff9900;
+}
+
+.link:hover::after, .active::after {
+  width: 60%; /* La línea se expande elegantemente bajo el texto */
+}
+
+/* --- Autenticación y Botón --- */
+.authContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.counterBadge {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: #d1d5db;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.loginBtn {
+  background: transparent;
+  color: #ff9900;
+  border: 1px solid #ff9900;
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-family: monospace;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+/* Estado Hover: Botón sólido con texto oscuro */
+.loginBtn:hover {
+  background: #ff9900;
+  color: #000000;
+  box-shadow: 0 0 15px rgba(255, 153, 0, 0.3);
+}
+
+/* --- Perfil Usuario Logueado --- */
+
+/* --- Perfil Usuario Logueado y Menú Desplegable --- */
+.userMenuContainer {
+  position: relative; /* Necesario para que el menú flote debajo */
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 153, 0, 0.1);
+  padding: 4px 12px 4px 4px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 153, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.userProfile:hover {
+  background: rgba(255, 153, 0, 0.2);
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Saludo "Hola, [Nombre]" */
+.greeting {
+  color: #d1d5db; /* Color gris claro para el 'Hola,' */
+  font-family: monospace;
+  font-size: 0.95rem;
+}
+
+.userName {
+  color: #ff9900; /* Nombre del usuario en naranja */
+  font-weight: bold;
+}
+
+.arrow {
+  color: #ff9900;
+  font-size: 0.7rem;
+  margin-left: 4px;
+}
+
+/* --- Menú Flotante --- */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 12px); /* Se posiciona justo debajo del botón */
+  right: 0;
+  background: #0b0e14; /* Fondo oscuro */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 8px 0;
+  min-width: 160px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  animation: slideDown 0.2s ease forwards;
+}
+
+.dropdownItem {
+  padding: 10px 20px;
+  color: #d1d5db;
+  font-family: monospace;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.dropdownItem:hover {
+  background: rgba(255, 153, 0, 0.1);
+  color: #ff9900;
+}
+
+/* Animación de entrada suave para el menú */
+@keyframes slideDown {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* --- NUEVOS ESTILOS BASE --- */
+
+/* 1. El botón hamburguesa no debe existir en pantallas grandes */
+.hamburger {
+  display: none; 
+  background: transparent;
+  border: none;
+  color: #ff9900;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 1000; /* Lo ponemos alto para que no quede detrás de nada */
+  transition: transform 0.2s ease;
+}
+
+.hamburger:active {
+  transform: scale(0.9); /* Un pequeño efecto de "hundimiento" al tocarlo */
+}
+
+/* 2. El nuevo contenedor padre que abraza tus enlaces y login */
+.menuContainer {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Le damos una separación horizontal entre los enlaces y el botón de login */
+}
+
+/* --- RESPONSIVE DESIGN (MÓVILES Y TABLETS PEQUEÑAS) --- */
+@media (max-width: 768px) {
+  
+  /* 1. Mostramos el botón hamburguesa */
+  .hamburger {
+    display: block; 
+  }
+
+  /* 2. Ajustamos un poco el logo para que no ocupe toda la barra */
+  .topText { font-size: 0.9rem; }
+  .bottomText { font-size: 0.75rem; }
+  .logoImg { width: 32px; height: 32px; }
+
+  /* 3. Transformamos el contenedor padre en un PANEL LATERAL DESPLEGABLE */
+  .menuContainer {
+    position: fixed; /* Lo desenganchamos del flujo normal */
+    top: 70px; /* Empieza justo debajo de tu navbar actual (que mide 70px) */
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 70px); /* Ocupa todo el alto de la pantalla restante */
+    background: #0b0e14; /* Le ponemos el fondo oscuro de tu diseño */
+    
+    /* Cambiamos la dirección para que los elementos se apilen hacia abajo */
+    flex-direction: column; 
+    justify-content: flex-start;
+    padding-top: 40px;
+    
+    /* Magia de animación: Lo empujamos fuera de la pantalla hacia la derecha */
+    transform: translateX(100%); 
+    opacity: 0;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease;
+    pointer-events: none; /* Evita que el usuario haga clic en enlaces invisibles */
+  }
+
+  /* 4. Cuando React añade la clase 'menuOpen', traemos el panel de vuelta a la pantalla */
+  .menuContainer.menuOpen {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto; /* Reactivamos los clics */
+  }
+
+  /* 5. Ajustes para los enlaces individuales dentro del panel */
+  .navLinks {
+    flex-direction: column; /* Apilamos los enlaces */
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+  }
+
+  .link {
+    font-size: 1.2rem; /* Hacemos la letra más grande para que sea fácil tocar con el dedo */
+    width: 80%;
+    text-align: center;
+  }
+
+  /* 6. Ajustes para la sección de autenticación */
+  .authContainer {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Una línea divisoria sutil */
+  }
+
+  /* 7. Arreglamos el menú desplegable (perfil de usuario) para que no se salga de la pantalla */
+  .dropdown {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%); /* Centramos el cuadrito de "Salir/Editar" */
+  }
+}

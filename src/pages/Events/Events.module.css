@@ -1,0 +1,726 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
+
+.pageContainer {
+  width: 100%;
+  min-height: 100vh;
+  /* Fondo Cyber Grid exacto del diseño */
+  background-color: #0b0f19;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(255, 153, 0, 0.08) 0%, transparent 40%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 36px 36px, 36px 36px;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #e2e8f0;
+}
+
+.mainContent {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 80px 20px 60px;
+  flex: 1;
+}
+
+/* =========================================
+   1. HERO & FILTROS
+   ========================================= */
+.heroSection {
+  margin-bottom: 40px;
+}
+
+.heroHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.clockIconBox {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: rgba(0, 199, 255, 0.1);
+  border: 1px solid rgba(0, 199, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 25px -4px rgba(0, 199, 255, 0.35);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.clockIcon {
+  width: 24px;
+  height: 24px;
+  color: #00C7FF;
+}
+
+.heroTitle {
+  font-size: clamp(1.875rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  background: linear-gradient(to right, #FF9900, #FFA726, #FF6A00);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin: 0;
+}
+
+.heroDesc {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin-top: 10px;
+  max-width: 768px;
+  line-height: 1.6;
+}
+
+.heroLink {
+  color: #FF9900;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+.heroLink:hover { text-decoration: underline; }
+
+.filtersContainer {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #1a2336;
+}
+
+@media (min-width: 640px) {
+  .filtersContainer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.filterPills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+}
+
+.pillActive {
+  background-color: #FF9900;
+  color: #000;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  box-shadow: 0 0 25px -4px rgba(255, 153, 0, 0.35);
+  cursor: pointer;
+}
+
+.pillBadge {
+  background: rgba(0,0,0,0.2);
+  padding: 2px 6px;
+  border-radius: 9999px;
+  font-size: 0.625rem;
+}
+
+.pillDefault {
+  background-color: #141b2b;
+  color: #cbd5e1;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid #232e44;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.pillDefault:hover {
+  color: #fff;
+  border-color: #64748b;
+}
+
+/* =========================================
+   2. TARJETAS DE EVENTOS (Base)
+   ========================================= */
+.eventList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* =========================================
+   3. TARJETAS: RUTA DE CERTIFICACIÓN Y EVENTOS DESPLEGABLES
+   ========================================= */
+.certCardWrap {
+  border-radius: 12px;
+  background-color: #121826;
+  border: 1px solid #222c40;
+  margin-bottom: 16px;
+  overflow: hidden; /* Importante para que el contenido oculto no se salga */
+  transition: all 0.3s;
+}
+
+.certCardActive {
+  border-color: #FF9900;
+}
+
+.certCardActive:hover {
+  box-shadow: 0 4px 20px -5px rgba(255, 153, 0, 0.15);
+}
+
+.certCardLocked {
+  opacity: 0.6;
+}
+
+/* La parte superior que siempre se ve (El botón clickeable) */
+.certCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  gap: 20px;
+  background-color: transparent;
+  transition: background-color 0.2s;
+}
+
+.certCardActive .certCardHeader:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.certLeft {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.certBadge {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.certInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.certLevelActive {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #00C7FF;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.certLevelLocked {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.certTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+/* Botones de la Cabecera */
+.btnIniciar {
+  background-color: #FF9900;
+  color: #000;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.btnIniciar:hover {
+  background-color: #E68A00;
+  transform: scale(1.02);
+}
+
+.btnCerrar {
+  background-color: #1a2336;
+  color: #FF9900;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: 1px solid #FF9900;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.btnCerrar:hover {
+  background-color: rgba(255, 153, 0, 0.1);
+}
+
+.btnProximamente {
+  background-color: #1a2336;
+  color: #64748b;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: 1px solid #2d3a52;
+  text-transform: uppercase;
+  cursor: not-allowed;
+  flex-shrink: 0;
+}
+
+/* === INTERIOR DESPLEGABLE DEL ACORDEÓN === */
+.certCardDetails {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), opacity 0.3s ease;
+  opacity: 0;
+  background-color: #0d121c; /* Un fondo un pelín más oscuro para diferenciarlo */
+}
+
+.detailsOpen {
+  max-height: 500px; /* Suficiente espacio para que se abra */
+  opacity: 1;
+  transition: max-height 0.5s ease-in-out, opacity 0.4s ease 0.1s;
+}
+
+.detailsContent {
+  padding: 0 24px 24px 118px; /* El 118px alinea el texto con el título (70px de imagen + 24px gap + padding) */
+  border-top: 1px dashed #222c40;
+  margin-top: 8px;
+  padding-top: 24px;
+}
+
+/* Para móviles: Quitar la sangría gigante para que se lea bien */
+@media (max-width: 640px) {
+  .detailsContent {
+    padding: 0 20px 20px 20px;
+  }
+}
+/* === ESTILOS DEL INTERIOR (Estilo Meetup) === */
+.topTags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  align-items: center;
+}
+.tagOrange {
+  color: #FF9900;
+}
+.tagDark {
+  background-color: #1a2336;
+  color: #94a3b8;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #2d3a52;
+}
+
+.innerTitle {
+  color: #FF9900;
+  font-size: 1.4rem;
+  margin: 0 0 12px 0;
+}
+
+.innerDesc {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+}
+
+.featurePills {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.featPill {
+  background-color: transparent;
+  border: 1px solid #2d3a52;
+  color: #64748b;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.innerFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #1a2336;
+  padding-top: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.organizerText {
+  color: #64748b;
+  font-size: 0.85rem;
+}
+.organizerText strong {
+  color: #cbd5e1;
+}
+
+.btnMeetup {
+  background-color: #FF9900;
+  color: #000;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btnMeetup:hover {
+  background-color: #E68A00;
+  transform: translateY(-2px);
+}
+
+
+
+
+
+
+/* =========================================
+   4. FORMULARIO CALL FOR SPEAKERS
+   ========================================= */
+.cfpBanner {
+  margin-top: 48px;
+  background-color: #101624;
+  border: 1px dashed #29364d;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+@media (min-width: 640px) { .cfpBanner { padding: 32px; } }
+
+.cfpContent {
+  max-width: 576px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cfpTag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #FF9900;
+}
+.cfpTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+.cfpDesc {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin: 0 0 16px 0;
+}
+@media (min-width: 640px) { .cfpDesc { font-size: 0.875rem; } }
+
+/* Estructura del Formulario */
+.cfpFormWrap { width: 100%; text-align: left; }
+.speakerForm { display: flex; flex-direction: column; gap: 12px; }
+.formRow { display: flex; gap: 12px; flex-direction: column; }
+@media (min-width: 640px) { .formRow { flex-direction: row; } }
+
+/* Inputs y Selects */
+
+/* --- NUEVO COMPONENTE: Teléfono Integrado --- */
+.phoneInputWrap {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: #121826;
+  border: 1px solid #29364d;
+  border-radius: 8px;
+  overflow: hidden; /* Mantiene los bordes redondeados limpios */
+  transition: border-color 0.2s;
+}
+
+/* Ilumina todo el borde exterior cuando haces clic dentro */
+.phoneInputWrap:focus-within {
+  border-color: #FF9900;
+}
+
+.countrySelect {
+  background-color: #1a2336;
+  color: #cbd5e1;
+  border: none;
+  border-right: 1px solid #29364d;
+  padding: 10px 8px 10px 14px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.875rem;
+  outline: none;
+  cursor: pointer;
+  height: 100%;
+}
+
+.countrySelect option {
+  background-color: #121826;
+  color: #fff;
+}
+
+.phoneInput {
+  flex: 1;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  padding: 10px 14px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.875rem;
+  outline: none;
+  width: 100%;
+}
+
+
+
+.formInput, .formArea, .formSelect {
+  width: 100%;
+  background-color: #121826;
+  border: 1px solid #29364d;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.formInput:focus, .formArea:focus, .formSelect:focus { border-color: #FF9900; }
+.formSelect { cursor: pointer; }
+
+/* Textarea y Contador */
+.textareaWrap { position: relative; width: 100%; }
+.formArea { resize: none; }
+.charCount {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font-size: 0.65rem;
+  color: #64748b;
+  font-family: 'JetBrains Mono', monospace;
+  pointer-events: none;
+}
+
+/* Botón de Submit */
+.cfpSubmitBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #FF9900;
+  color: #000;
+  border: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+.cfpSubmitBtn:hover { background-color: #E68A00; transform: translateY(-2px); }
+
+/* Mensajes de Éxito/Error */
+.successMessage {
+  text-align: center;
+  padding: 32px 20px;
+  background: rgba(0, 229, 130, 0.05);
+  border: 1px dashed rgba(0, 229, 130, 0.3);
+  border-radius: 12px;
+}
+.successMessage h4 { color: #00E582; margin: 0 0 8px; font-size: 1.25rem; }
+.successMessage p { color: #94a3b8; margin: 0 0 16px; font-size: 0.875rem; }
+.cfpBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #1a2336;
+  color: #fff;
+  border: 1px solid #30405d;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.cfpBtn:hover { background-color: #25324d; }
+.errorMessage { color: #ef4444; font-size: 0.75rem; text-align: center; margin-top: 8px; }
+
+
+/* =========================================
+   5. FOOTER ORIGINAL DEL ITB
+   ========================================= */
+
+/* === ESTILOS DEL NUEVO DISEÑO INTERIOR === */
+.eventLayoutGrid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .eventLayoutGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cuadro póster izquierdo con fondo oscuro */
+.posterBox {
+  background-color: #070a10;
+  border: 1px solid #1f293d;
+  border-radius: 10px;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  position: relative;
+}
+
+.posterTag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: #FF9900;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.posterCenterIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.posterBottomText {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #64748b;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.infoColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo para los textos en misterio (???) */
+.mysteryText {
+  font-family: 'JetBrains Mono', monospace;
+  color: #FF9900;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  background: rgba(255, 153, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.metaIcon {
+  margin-right: 8px;
+}
+
+.btnProximamenteLocked {
+  background-color: #1a2336;
+  color: #64748b;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid #2d3a52;
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   REFINAMIENTOS RESPONSIVE PARA MÓVIL (TARJETAS)
+   ========================================= */
+@media (max-width: 640px) {
+  /* 1. Rompemos la fila: Forzamos a que el contenido se apile hacia abajo */
+  .certCardHeader {
+    flex-direction: column;
+    align-items: flex-start; /* Alinea todo a la izquierda */
+    padding: 20px 16px; 
+    gap: 20px;
+  }
+  
+  /* 2. El contenedor del logo y texto toma todo el ancho disponible */
+  .certLeft {
+    width: 100%;
+    align-items: flex-start; /* Sube el texto para que quede alineado con la punta del logo */
+    gap: 16px; 
+  }
+  
+  /* 3. Reducimos el logo para que no le robe espacio a las letras */
+  .certBadge {
+    width: 48px; 
+    height: 48px;
+    flex-shrink: 0; /* Prohíbe que el logo se aplaste perdiendo su forma */
+    margin-top: 2px;
+  }
+  
+  /* 4. Le damos libertad al texto para expandirse a lo ancho */
+  .certInfo {
+    width: 100%;
+  }
+  
+  .certTitle {
+    font-size: 1.15rem; 
+    line-height: 1.4;
+  }
+  
+  /* 5. El botón pasa a la parte inferior y ocupa de lado a lado */
+  .btnIniciar, 
+  .btnCerrar, 
+  .btnProximamente {
+    width: 100%;
+    text-align: center;
+    padding: 14px; 
+    margin-top: 4px; /* Lo separa un poco del texto superior */
+  }
+
+  /* Ajuste para el formulario Call for Speakers en móviles */
+  .cfpBanner {
+    padding: 24px 16px; 
+  }
+}

@@ -1,0 +1,286 @@
+/* src/components/Footer/Footer.module.css */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+.footerWrapper {
+  width: 100%;
+  background-color: #05070B;
+  color: #e2e8f0;
+  font-family: 'Space Grotesk', sans-serif;
+  border-top: 1px solid rgba(30, 41, 59, 0.8);
+  margin-top: auto; /* Empuja el footer siempre al final */
+}
+
+/* =========================================
+   1. SKYLINE & ANIMACIONES
+   ========================================= */
+.skylineSection {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(30, 41, 59, 0.6);
+  background-color: #070b12;
+}
+
+.techGrid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.6;
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.gradientAtmo {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #070b12, rgba(9, 15, 27, 0.7), transparent);
+  pointer-events: none;
+}
+
+.moon {
+  position: absolute;
+  right: 20%;
+  top: 32px;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background-color: #fef08a;
+  box-shadow: 0 0 45px rgba(254, 240, 138, 0.35);
+  animation: pulseGlow 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.citySvg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glowDot { filter: drop-shadow(0 0 4px #00E5FF); }
+
+/* =========================================
+   2. FANTASMAS Y SUS PIEZAS
+   ========================================= */
+.ghostsContainer {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ghost {
+  position: absolute;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.6));
+}
+
+.ghost1 { left: 22%; top: 96px; animation: float 6s ease-in-out infinite; }
+.ghost2 { left: 49%; top: 128px; animation: float 7s ease-in-out 2.5s infinite alternate-reverse; }
+.ghost3 { right: 31%; top: 80px; animation: float 5s ease-in-out 1.2s infinite; }
+
+.ghostBody {
+  width: 48px;
+  height: 56px;
+  background-color: #ffffff;
+  border-top-left-radius: 999px;
+  border-top-right-radius: 999px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.ghostBodyDark { background-color: rgba(255,255,255,0.95); }
+
+.hardhat {
+  position: absolute;
+  top: -12px;
+  width: 44px;
+  height: 16px;
+  background-color: #FF9900;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom: 2px solid #d97706;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.hatReflect { width: 16px; height: 4px; background-color: rgba(255,255,255,0.4); border-radius: 2px; }
+.eyes { display: flex; gap: 10px; margin-top: 20px; }
+.eye { width: 8px; height: 10px; background-color: #090D16; }
+.eyesUpsideDown { margin-top: 16px; }
+.eyeSquare { width: 8px; height: 8px; }
+.blush { width: 6px; height: 6px; background-color: #FF9900; border-radius: 50%; margin-top: 4px; }
+.skirt { position: absolute; bottom: -6px; left: 0; width: 100%; display: flex; justify-content: space-between; padding: 0 2px; }
+.skirtCurve { width: 10px; height: 10px; background-color: #ffffff; border-radius: 50%; }
+.skirtCurveDark { background-color: rgba(255,255,255,0.95); }
+
+.handLeft { position: absolute; top: -4px; left: -4px; width: 10px; height: 8px; background-color: #e2e8f0; border-radius: 999px; border: 1px solid #94a3b8; }
+.handRight { position: absolute; top: -4px; right: -4px; width: 10px; height: 8px; background-color: #e2e8f0; border-radius: 999px; border: 1px solid #94a3b8; }
+
+/* Animaciones */
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+@keyframes pulseGlow { 0%, 100% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
+
+/* =========================================
+   3. CONTENIDO DEL FOOTER (GRID)
+   ========================================= */
+
+.mainContent { max-width: 1280px; margin: 0 auto; padding: 64px 24px; position: relative; z-index: 10; }
+
+/* En celulares (por defecto): 1 sola columna y los elementos ocupan lo automático */
+.footerGrid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+.colBrand { grid-column: auto; display: flex; flex-direction: column; gap: 24px; }
+.colLinks2 { grid-column: auto; }
+.colLinks3 { grid-column: auto; display: flex; flex-direction: column; gap: 16px; }
+
+/* En Tablets: 2 columnas */
+@media (min-width: 768px) { 
+  .footerGrid { grid-template-columns: repeat(2, 1fr); }
+  .colBrand { grid-column: span 2; } /* La marca ocupa toda la fila superior en tablet */
+}
+
+/* En Computadoras: 12 columnas para distribuir el espacio como un experto */
+@media (min-width: 1024px) { 
+  .footerGrid { grid-template-columns: repeat(12, 1fr); gap: 32px; }
+  .colBrand { grid-column: span 4; }
+  .colLinks2 { grid-column: span 2; }
+  .colLinks3 { grid-column: span 4; }
+}
+
+
+.logoRow { display: flex; align-items: center; gap: 12px; }
+.logoIcon { width: 40px; height: 40px; border-radius: 8px; background: linear-gradient(to bottom right, #FF9900, #E68A00); display: flex; align-items: center; justify-content: center; color: black; padding: 6px; box-shadow: 0 4px 15px rgba(255, 153, 0, 0.2); }
+.brandName { font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 700; color: #fff; margin: 0; }
+.brandSub { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #FF9900; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin: 0; }
+.brandDesc { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; max-width: 400px; margin: 0; }
+
+
+/* Borra .socialRow y .socialBtn, y pega esto en su lugar: */
+.footerSocials { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 12px; 
+  margin-top: 8px; 
+}
+
+.socialBox { 
+  width: 40px; 
+  height: 40px; 
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  border-radius: 8px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  color: #ffffff; 
+  transition: all 0.3s ease; 
+  cursor: pointer; 
+  background: transparent; 
+}
+
+.socialBox:hover { 
+  background: #ff9900; 
+  border-color: #ff9900; 
+  color: #000; 
+  transform: translateY(-3px); 
+}
+
+
+.socialBtn:hover { background-color: #FF9900; color: #000; transform: scale(1.05); box-shadow: 0 4px 15px rgba(255, 153, 0, 0.2); }
+
+.colTitle { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; color: #A78BFA; text-transform: uppercase; margin-bottom: 16px; }
+.colTitle span { color: #64748b; font-weight: 400; margin-right: 4px; }
+
+.linkList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.linkList a { color: #cbd5e1; font-size: 0.875rem; text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 6px; }
+.linkList a::before { content: '>'; font-family: 'JetBrains Mono', monospace; color: #FF9900; opacity: 0; transition: opacity 0.2s; font-size: 0.75rem; }
+.linkList a:hover { color: #FF9900; }
+.linkList a:hover::before { opacity: 1; }
+
+.contactBox { display: block; padding: 12px; border-radius: 8px; background-color: rgba(15, 23, 42, 0.6); border: 1px solid #1e293b; text-decoration: none; transition: all 0.2s; }
+.contactBox:hover { border-color: rgba(255, 153, 0, 0.4); background-color: rgba(30, 41, 59, 0.6); }
+.contactRow { display: flex; gap: 12px; align-items: flex-start; }
+.contactIcon { color: #FF9900; margin-top: 2px; }
+.contactLabel { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; }
+
+.contactValue { 
+  font-family: 'JetBrains Mono', monospace; 
+  font-size: 0.8rem; 
+  color: #e2e8f0; 
+  margin-top: 2px; 
+  transition: color 0.2s;
+  word-break: break-all; 
+}
+
+.contactBox:hover .contactValue { color: #FF9900; }
+
+.locationBox { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 8px; background-color: rgba(15, 23, 42, 0.6); border: 1px solid #1e293b; }
+.locIcon { color: #f43f5e; }
+
+/* =========================================
+   4. BARRA INFERIOR (COORDENADAS)
+   ========================================= */
+.bottomBar { background-color: #05070c; border-top: 1px solid rgba(30, 41, 59, 0.7); padding: 24px 0; }
+.bottomContent { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 16px; }
+.coordRow { display: flex; flex-direction: column; gap: 12px; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; }
+@media (min-width: 640px) { .coordRow { flex-direction: row; align-items: center; } }
+.coordLeft { display: flex; align-items: center; gap: 8px; color: #94a3b8; }
+.coordSign { color: #22d3ee; font-weight: 700; }
+.coordRight { color: #FF9900; font-weight: 700; text-transform: uppercase; background: rgba(255, 153, 0, 0.1); border: 1px solid rgba(255, 153, 0, 0.3); padding: 2px 8px; border-radius: 4px; }
+.neonLine { width: 100%; height: 1px; background: linear-gradient(to right, transparent, rgba(255, 153, 0, 0.6), transparent); }
+.copyRow { display: flex; flex-direction: column; gap: 16px; justify-content: space-between; align-items: flex-start; color: #64748b; font-size: 0.75rem; }
+@media (min-width: 768px) { .copyRow { flex-direction: row; align-items: center; } }
+.disclaimer { max-width: 500px; text-align: left; line-height: 1.5; }
+@media (min-width: 768px) { .disclaimer { text-align: right; } }
+
+
+
+/* =========================================
+   REFINAMIENTOS FINALES PARA MÓVIL
+   ========================================= */
+@media (max-width: 768px) {
+  /* Reducimos un poco la altura del cielo en celulares */
+  .skylineSection { 
+    height: 240px; 
+  }
+  
+  /* Hacemos a los fantasmas ligeramente más pequeños */
+  .ghostsContainer { 
+    transform: scale(0.85); /* Quitamos el translateY que los bajaba mucho */
+  }
+
+  /* REPOSICIONAMIENTO MANUAL DE FANTASMAS PARA MÓVIL */
+  /* Fantasma 1 (Izquierda) */
+  .ghost1 {
+    left: 10%; /* Lo empujamos más hacia el borde izquierdo */
+    top: 60px; /* Lo subimos un poco */
+  }
+
+  /* Fantasma 2 (El invertido, Centro-Abajo) */
+  .ghost2 {
+    left: 40%; /* Lo centramos mejor */
+    top: 100px; /* Lo bajamos para que no tape a los otros */
+  }
+
+  /* Fantasma 3 (Derecha) */
+  .ghost3 {
+    right: 5%; /* Lo empujamos bien a la derecha */
+    top: 50px; /* Lo subimos */
+  }
+  
+  /* Centramos los textos de copyright y el disclaimer */
+  .copyRow { 
+    align-items: center; 
+    text-align: center; 
+  }
+  
+  .disclaimer { 
+    text-align: center; 
+  }
+}
