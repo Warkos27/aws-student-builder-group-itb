@@ -5,12 +5,10 @@ import AuthModal from '../../components/AuthModal/AuthModal';
 
 
 import styles from './Events.module.css';
-import chipIcon from '../../assets/chip.png'; 
 
 // =========================================================
 // 0. BASE DE DATOS ESTÁTICA
 // =========================================================
-const eventosOficiales: any[] = []; 
 
 const rutaCertificacion = [
   {

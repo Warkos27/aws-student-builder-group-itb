@@ -5,7 +5,6 @@ import AuthModal from '../../components/AuthModal/AuthModal'; // El nuevo modal
 
 
 import styles from './Certification.module.css';
-import chipIcon from '../../assets/chip.png'; 
 import PractitionerChallenge from './PractitionerChallenge/PractitionerChallenge';
 // Importa tu imagen aquí (ajusta la ruta si es necesario)
 import awsPractitionerBadge from '../../assets/aws-practitioner.webp';
