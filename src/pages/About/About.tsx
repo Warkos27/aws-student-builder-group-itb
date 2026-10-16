@@ -2,7 +2,7 @@ import styles from './About.module.css';
 
 // 1. IMPORTA TUS IMÁGENES AQUÍ (Crea una carpeta en assets si no la tienes)
 // Ejemplo: import markoImg from '../../assets/team/marko.jpg';
-import chipIcon from '../../assets/chip.png';
+/*import chipIcon from '../../assets/chip.png';*/
 
 
 import Lider_Marko from '../../assets/COMUNITY DAY CUENCA 05/Markos.jpg'
@@ -11,7 +11,7 @@ import Mery from '../../assets/Mery Garcia.jpeg'
 import Luigi from '../../assets/Luigi.jpg'
 import markoLego from '../../assets/marko_lego.png';
 import meetupIcon from '../../assets/Meetup_Logo.png'
-import markitosxxxx from '../../assets/Markitoss.png'
+/*import markitosxxxx from '../../assets/Markitoss.png'*/
 
 
 // Array de tu equipo (Puedes agregar a todos los miembros aquí)

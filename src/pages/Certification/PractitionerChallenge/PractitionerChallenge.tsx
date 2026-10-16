@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import styles from './PractitionerChallenge.module.css';
 
 import skillBuilderLogo from "../../../assets/skill-builder.png";
@@ -14,9 +13,9 @@ import dropIcon from '../../../assets/drop.png';
 import trophyIcon from '../../../assets/trophy.png';
 import relogIcon from '../../../assets/relog1.png';
 import teams from '../../../assets/teams.png';
-import aws1 from '../../../assets/aws1.png';
+/*import aws1 from '../../../assets/aws1.png';
 import aws2 from '../../../assets/aws2.png';
-import aws3 from '../../../assets/aws3.png';
+import aws3 from '../../../assets/aws3.png';*/
 
 
 import card19  from '../../../assets/car16.png';
