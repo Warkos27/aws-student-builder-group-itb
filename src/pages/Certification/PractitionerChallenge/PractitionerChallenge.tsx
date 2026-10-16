@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styles from './PractitionerChallenge.module.css';
 
 import skillBuilderLogo from "../../../assets/skill-builder.png";
@@ -84,9 +85,9 @@ const [userProgress, setUserProgress] = useState<Record<number, { quiz: boolean,
 
 
   // === ESTADOS DE PROGRESO Y MODAL ===
-  const [tasks, setTasks] = useState({ sim: false, quiz: false, survey: false });
 
   // Cálculos de la barra de progreso
+  const [tasks] = useState({ sim: false, quiz: false, survey: false });
   const completedCount = Object.values(tasks).filter(Boolean).length;
   const progressPercent = Math.round((completedCount / 3) * 100);
 
