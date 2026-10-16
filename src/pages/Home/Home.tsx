@@ -59,8 +59,8 @@ import cuencaEvents from '../../assets/cuencaEvent.jpg';
 // 2. Importamos los PNGs de los servicios (Constelaciones)
 import lambdaIcon from '../../assets/Icon/Lamdan.png';
 import computeIcon from '../../assets/Icon/Arch-Category_Compute_48.png';
-import dynamoIcon from '../../assets/Icon/dynamodb.png';
-import securityIcon from '../../assets/Icon/iam.png';
+import dynamoIcon from '../../assets/Icon/DynamoDB.png';
+import securityIcon from '../../assets/Icon/IAM.png';
 import auroraIcon from '../../assets/Icon/Aurora.png'; 
 import networkIcon from '../../assets/Icon/Arch-Category_Networking-Content-Delivery_48.png';
 import gamesIcon from '../../assets/Icon/Arch-Category_Games_48.png';
