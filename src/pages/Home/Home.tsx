@@ -39,11 +39,9 @@ import day12 from '../../assets/COMUNITY DAY CUENCA 05/day12.jpg';
 import day13 from '../../assets/COMUNITY DAY CUENCA 05/day13.jpg';
 import day14 from '../../assets/COMUNITY DAY CUENCA 05/day14.jpg';
 import day15 from '../../assets/COMUNITY DAY CUENCA 05/day15.jpg';
-/*import day16 from '../../assets/COMUNITY DAY CUENCA 05/day16.jpg';*/
 import day17 from '../../assets/COMUNITY DAY CUENCA 05/day17.jpg';
 import day18 from '../../assets/COMUNITY DAY CUENCA 05/day18.jpg';
 import day19 from '../../assets/COMUNITY DAY CUENCA 05/day19.jpg';
-/*import day20 from '../../assets/COMUNITY DAY CUENCA 05/day20.jpg';*/
 
 
 import days1 from '../../assets/COMUNITY DAY CUENCA 05/days1.jpg';
