@@ -346,6 +346,316 @@ background: radial-gradient(circle at 0% 0%, rgba(251, 151, 2, 0.122) 0%, transp
   flex: 1; 
 }
 
+/* ================= NUEVO DISEÑO SIMULADOR ================= */
+.simCard {
+  background: linear-gradient(180deg, rgba(20, 26, 43, 0.88) 0%, rgba(13, 17, 28, 0.94) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 153, 0, 0.3);
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 20px -3px rgba(255, 153, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.2s ease;
+}
+
+.simCard:active {
+  transform: scale(0.99);
+}
+
+/* ================= NUEVO DISEÑO SKILL BUILDER ================= */
+.skillCard {
+  background: linear-gradient(180deg, rgba(20, 26, 43, 0.88) 0%, rgba(13, 17, 28, 0.94) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(147, 83, 211, 0.3); /* Borde morado sutil */
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.3s ease;
+}
+
+.skillCard:hover {
+  border-color: rgba(147, 83, 211, 0.6);
+  box-shadow: 0 0 20px -3px rgba(168, 85, 247, 0.25);
+}
+
+.skillCard:active {
+  transform: scale(0.99);
+}
+
+.skillBadgeRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.skillBadgePurple {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #c084fc; /* Morado claro */
+  background-color: rgba(168, 85, 247, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.skillFormatText {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #10b981; /* Verde menta */
+}
+
+.skillLogoContainer {
+  background-color: #ffffff;
+  padding: 8px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  display: inline-flex;
+  margin: 0 auto 12px auto;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Aprovechamos la clase que ya tenías para tu imagen */
+.skillLogoImg {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+}
+
+.skillTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  margin: 0 0 8px 0;
+  letter-spacing: 0.5px;
+}
+
+.skillDesc {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-align: center;
+  line-height: 1.6;
+  margin: 0 0 12px 0;
+  padding: 0 8px;
+}
+
+.skillTagsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.skillTag {
+  background-color: rgba(30, 41, 59, 0.9);
+  color: #cbd5e1;
+  border: 1px solid rgba(51, 65, 85, 0.6);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.skillButton {
+  width: 100%;
+  min-height: 48px;
+  background-color: rgba(15, 23, 42, 0.9);
+  color: #d8b4fe; /* Texto morado claro */
+  border: 1px solid rgba(168, 85, 247, 0.5); /* Borde morado */
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 20px -3px rgba(168, 85, 247, 0.25);
+  transition: all 0.2s;
+  position: relative;
+  z-index: 2;
+}
+
+.skillButton:hover {
+  background-color: rgba(30, 41, 59, 1);
+  color: #ffffff;
+  border-color: rgba(168, 85, 247, 0.8);
+}
+
+.skillButton:active {
+  transform: scale(0.98);
+}
+
+.simCardBgGlow {
+  position: absolute;
+  top: -64px;
+  right: -64px;
+  width: 128px;
+  height: 128px;
+  background-color: rgba(255, 153, 0, 0.15);
+  border-radius: 50%;
+  filter: blur(24px);
+  pointer-events: none;
+}
+
+.simBadgeRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.simBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #FF9900;
+  background-color: rgba(255, 153, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 153, 0, 0.2);
+  font-weight: 600;
+}
+
+.simFormatText {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+.simIconContainer {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #1e293b 0%, #000000 100%);
+  padding: 14px;
+  border: 1px solid rgba(255, 153, 0, 0.4);
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+  margin: 0 auto 12px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.simIcon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 8px rgba(255,153,0,0.8));
+}
+
+.simTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  margin: 0 0 8px 0;
+  letter-spacing: 0.5px;
+}
+
+.simDesc {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-align: center;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0 8px;
+}
+
+.simStatsRow {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  padding: 10px;
+  border: 1px solid rgba(30, 41, 59, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.simStatCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.simStatLabel {
+  color: #94a3b8;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.simStatValue {
+  font-weight: 700;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+.simStatValue.cyan { color: #00C7FF; }
+.simStatValue.mint { color: #10b981; }
+
+.simDivider {
+  height: 24px;
+  width: 1px;
+  background-color: #1e293b;
+}
+
+.simButton {
+  width: 100%;
+  min-height: 48px;
+  background-color: #FF9900;
+  color: #090d16;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 153, 0, 0.2);
+  transition: all 0.2s;
+  position: relative;
+  z-index: 2;
+}
+
+.simButton:hover { background-color: #ffaa22; }
+.simButton:active { transform: scale(0.98); }
+
 /* Botones y estado */
 .btnToolPrimary, .btnToolSecondary, .btnToolOutline {
   width: 100%;
@@ -443,16 +753,17 @@ background: radial-gradient(circle at 0% 0%, rgba(251, 151, 2, 0.122) 0%, transp
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* Fondo original: #0d131f. Lo cambiamos a un degradado sutil morado */
-  background: linear-gradient(135deg, #110e1a 0%, #17122a 100%);
-  border: 1px solid #2d244a; /* Borde morado oscuro */
-  border-radius: 12px;
+  background: linear-gradient(180deg, #121828 0%, #0d121e 100%);
+  border: 1px solid rgba(56, 189, 248, 0.3); /* Borde cyan */
+  border-radius: 16px;
   padding: 32px;
   margin-top: 20px;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 24px;
   transition: all 0.4s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra suave */
+  box-shadow: 0 0 25px -4px rgba(56, 189, 248, 0.16); /* glow-cyan-subtle */
+  position: relative;
+  overflow: hidden;
 }
 
 .bannerUnlocked {
@@ -461,22 +772,100 @@ background: radial-gradient(circle at 0% 0%, rgba(251, 151, 2, 0.122) 0%, transp
   box-shadow: 0 0 30px rgba(167, 139, 250, 0.15);
 }
 
-.certBannerLeft { display: flex; align-items: center; gap: 24px; flex: 1; min-width: 300px; }
-.hugeIcon { width: 56px; height: 56px; image-rendering: pixelated; }
+.certBannerLeft {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex: 1;
+  min-width: 300px;
+  position: relative;
+  z-index: 2;
+}
+
+.certIconWrap {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hGateIcon {
+  width: 58px; /* Ajustado para el nuevo SVG */
+  height: 58px; /* Ajustado para el nuevo SVG */
+  color: #38bdf8; /* Cyan AWS */
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.7));
+  animation: pulseCyanGlow 3s infinite alternate;
+}
+
+@keyframes pulseCyanGlow {
+  0% { filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.4)); }
+  100% { filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.9)); }
+}
+
+.certTextContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.certTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.certDesc {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
+  max-width: 500px; /* Evita que el texto se estire demasiado en pantallas anchas */
+}
+
+.certActionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 200px;
+  position: relative;
+  z-index: 2;
+}
+
 .certBannerLeft h3 { color: #fff; font-size: 1.3rem; margin: 0 0 8px 0; }
 .certBannerLeft p { color: #94a3b8; font-size: 0.9rem; margin: 0; line-height: 1.5; }
 
 .btnClaimLocked {
-  background-color: rgba(30, 41, 59, 0.4); 
-  color: #64748b; 
-  border: 1px solid #334155;
-  font-family: 'JetBrains Mono', monospace; 
+  width: 100%;
+  background-color: rgba(11, 16, 28, 0.9);
+  color: #64748b;
+  border: 1px solid rgba(30, 41, 59, 0.9);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
   padding: 16px 24px;
-  border-radius: 8px; 
+  border-radius: 12px;
   cursor: not-allowed;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.3s;
+}
+
+.btnClaimLocked:hover {
+  background-color: rgba(15, 23, 42, 0.9);
+}
+
+.certRequirementText {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: #64748b;
+  text-align: center;
+  margin: 0;
 }
 
 .sessionActions {
@@ -951,7 +1340,13 @@ background: radial-gradient(circle at 0% 0%, rgba(251, 151, 2, 0.122) 0%, transp
 
 .btnTextLink.completed {
   color: #10b981;
-  cursor: default;
+  cursor: pointer; /* Cambiado a pointer */
+  transition: all 0.2s ease;
+}
+
+.btnTextLink.completed:hover {
+  color: #34d399; /* Verde un poco más brillante */
+  transform: translateX(3px); /* Pequeño salto a la derecha al hacer hover */
 }
 
 /* Ajustes del cuerpo de la sesión */
@@ -1044,6 +1439,27 @@ background: radial-gradient(circle at 0% 0%, rgba(251, 151, 2, 0.122) 0%, transp
   color: #94a3b8;
 }
 
+.btnTextLinkPurple {
+  background: none;
+  border: none;
+  color: #c084fc; /* Color morado/rosita claro */
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  text-shadow: 0 0 10px rgba(192, 132, 252, 0.4);
+}
+
+.btnTextLinkPurple:hover {
+  color: #e9d5ff; /* Se aclara al pasar el mouse */
+  text-shadow: 0 0 15px rgba(192, 132, 252, 0.8);
+  transform: translateX(3px); /* Pequeño salto a la derecha al hacer hover */
+}
+
 /* Botones invisibles como enlaces */
 .btnTextLink {
   background: none;
@@ -1064,7 +1480,13 @@ background: radial-gradient(circle at 0% 0%, rgba(251, 151, 2, 0.122) 0%, transp
 
 .btnTextLink.completed {
   color: #10b981;
-  cursor: default;
+  cursor: pointer; /* Cambiado a pointer */
+  transition: all 0.2s ease;
+}
+
+.btnTextLink.completed:hover {
+  color: #34d399; /* Verde un poco más brillante */
+  transform: translateX(3px); /* Pequeño salto a la derecha al hacer hover */
 }
 
 

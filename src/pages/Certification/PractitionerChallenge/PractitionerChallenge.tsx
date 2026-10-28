@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 import styles from './PractitionerChallenge.module.css';
 
 import skillBuilderLogo from "../../../assets/skill-builder.png";
@@ -6,6 +7,7 @@ import skillBuilderLogo from "../../../assets/skill-builder.png";
 import logoCert from '../../../assets/aws-practitioner.webp';
 
 import seccion1 from '../../../assets/seccion1.jpg'
+
 
 // === IMPORTACIÓN DE TUS ICONOS PIXEL ART (Ajusta la ruta si es necesario) ===
 import chipIcon from '../../../assets/chip.png';
@@ -17,9 +19,10 @@ import teams from '../../../assets/teams.png';
 /*import aws1 from '../../../assets/aws1.png';
 import aws2 from '../../../assets/aws2.png';
 import aws3 from '../../../assets/aws3.png';*/
+import expositor1Img from '../../../assets/Expositor1.jpg';
 
 
-import card19  from '../../../assets/car16.png';
+/*import card19  from '../../../assets/car16.png';*/
 
 
 
@@ -44,22 +47,38 @@ interface Session {
 
 const sessionsData: Session[] = [
   {
-    id: 1, sessionNum: "SESIÓN 1", dateStr: "15/10/2026 • 18:00", 
-    fullDate: "Jueves 15 de octubre de 2026, 6:00 p. m. (GMT-5)",  
-    title: "Primer Meetup AWS ITB",
-    shortDesc: "INTRODUCCIÓN A LA NUBE Y CONCEPTOS CLAVE", 
-    speakerName: "Marko Rojas", 
-    speakerRole: "AWS SBG Leader ITB",
-    speakerImg: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300",
-    bannerImg: seccion1,
-    meetupUrl: "https://www.meetup.com/aws-sbg-at-bolivarian-uni-higher-inst-of-tech-naval-campus/",
-    surveyUrl: "https://pulse.amazon/survey/UPCU4UQO",
-    isSurveyActive: false, // <--- EL DÍA DEL EVENTO CAMBIA ESTO A true
-    isSurprise: true,
+    id: 1, 
+    sessionNum: "SESIÓN 1", 
+    dateStr: "29/10/2026 • 19:00", 
+    fullDate: "Jueves 29 de octubre de 2026, 7:00 p. m. (Vía Google Meet)",  
+    title: "Los Cimientos y la Arquitectura de AWS",
+    shortDesc: "VÍA GOOGLE MEET", 
+    speakerName: "Kevin Lupera", 
+    speakerRole: "Engineering Manager en Alegra | AWS Community Builder",
+    speakerImg: "", // Dejar vacío o poner foto de perfil si la utilizas en la UI
+    bannerImg: expositor1Img, // <-- La imagen de tu flyer oficial
+    meetupUrl: "https://l1nq.com/p0ata0c", // <-- El nuevo enlace
+    surveyUrl: "https://pulse.amazon/survey/UPCU4UQO?p=0",
+    isSurveyActive: true, 
+    isSurprise: false, // <-- ¡Sorpresa fuera! El evento 1 se devela
     status: "active"
   },
   {
-    id: 2, sessionNum: "SESIÓN 2", dateStr: "Por definir", fullDate: "", title: "Próximamente", shortDesc: "Por anunciar", speakerName: "Por confirmar", speakerRole: "Invitado Especial", speakerImg: "", bannerImg: "", meetupUrl: "#", surveyUrl: "#", isSurveyActive: false, status: "locked"
+    id: 2, 
+    sessionNum: "SESIÓN 2", 
+    dateStr: "Por definir", 
+    fullDate: "Próximamente", 
+    title: "Segundo Meetup AWS ITB", 
+    shortDesc: "Por anunciar", 
+    speakerName: "Por confirmar", 
+    speakerRole: "Invitado Especial", 
+    speakerImg: "", 
+    bannerImg: seccion1, // Dejamos el placeholder viejo de fondo
+    meetupUrl: "#", 
+    surveyUrl: "#", 
+    isSurveyActive: false, 
+    isSurprise: true, // <-- Movemos la sorpresa para la sesión 2
+    status: "active" // Cambiado a active temporalmente para que la capa blur no pierda color
   },
   {
     id: 3, sessionNum: "SESIÓN 3", dateStr: "Por definir", fullDate: "", title: "Próximamente", shortDesc: "Por anunciar", speakerName: "Por confirmar", speakerRole: "Invitado Especial", speakerImg: "", bannerImg: "", meetupUrl: "#", surveyUrl: "#", isSurveyActive: false, status: "locked"
@@ -77,16 +96,85 @@ const sessionsData: Session[] = [
 
 export default function PractitionerChallenge() {
 
-// Guardamos qué actividades ha completado el usuario por ID de sesión
-const [userProgress, setUserProgress] = useState<Record<number, { quiz: boolean, survey: boolean }>>({});
+  // 1. Recuperar el progreso desde LocalStorage para que no se pierda al recargar
+  const [userProgress, setUserProgress] = useState<Record<number, { quiz: boolean, survey: boolean }>>(() => {
+    const saved = localStorage.getItem('itb_user_progress');
+    return saved ? JSON.parse(saved) : {};
+  });
 
-// Estado para el modal (ahora sirve para los quizzes de cada sesión y el simulador)
+  // 2. Estado para guardar a qué hora le dieron clic al botón de encuesta
+  const [pendingSurveys, setPendingSurveys] = useState<Record<number, number>>(() => {
+    const saved = localStorage.getItem('itb_pending_surveys');
+    return saved ? JSON.parse(saved) : {};
+  });
+
+  // 3. Efectos para guardar automáticamente los cambios en LocalStorage
+  useEffect(() => {
+    localStorage.setItem('itb_user_progress', JSON.stringify(userProgress));
+  }, [userProgress]);
+
+  useEffect(() => {
+    localStorage.setItem('itb_pending_surveys', JSON.stringify(pendingSurveys));
+  }, [pendingSurveys]);
+
+  // 4. Efecto MAESTRO: Detecta cuando el usuario vuelve a esta pestaña
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      // Si el usuario acaba de regresar a ver esta página...
+      if (document.visibilityState === 'visible') {
+        const now = Date.now();
+        let hasChanges = false;
+        
+        setUserProgress(prevProgress => {
+          const newProgress = { ...prevProgress };
+          
+          setPendingSurveys(prevPending => {
+            const newPending = { ...prevPending };
+            
+            Object.keys(newPending).forEach(key => {
+              const sessionId = Number(key);
+              const startTime = newPending[sessionId];
+              
+              // Verificamos si ya pasaron 60,000 milisegundos (1 minuto completo)
+              if (now - startTime >= 60000) {
+                newProgress[sessionId] = { ...newProgress[sessionId], survey: true };
+                delete newPending[sessionId]; // Lo quitamos de la lista de espera
+                hasChanges = true;
+              }
+            });
+            return newPending;
+          });
+          
+          return hasChanges ? newProgress : prevProgress;
+        });
+      }
+    };
+
+    // Escuchamos el evento de cambio de visibilidad de la pestaña
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    // Ejecutamos una vez al cargar por si recargaron la página mientras esperaban
+    handleVisibilityChange();
+
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []);
+
+  // 5. Manejador del botón (Abre enlace y empieza a contar el tiempo)
+  const handleSurveyClick = (sessionId: number, url: string) => {
+    window.open(url, '_blank');
+    
+    // Si aún no está completado, guardamos la hora exacta del clic
+    if (!userProgress[sessionId]?.survey) {
+      setPendingSurveys(prev => {
+        // Si ya le habían dado clic antes, respetamos el tiempo original, si no, uno nuevo.
+        return { ...prev, [sessionId]: prev[sessionId] || Date.now() };
+      });
+    }
+  }; // <--- ¡Esta llave era la que faltaba!
+
+  // Estado para el modal (ahora sirve para los quizzes de cada sesión y el simulador)
   const [modalData, setModalData] = useState({ isOpen: false, type: '', sessionId: 0, title: '', desc: '' });
 
-
   // === ESTADOS DE PROGRESO Y MODAL ===
-
-  // Cálculos de la barra de progreso
   const [tasks] = useState({ sim: false, quiz: false, survey: false });
   const completedCount = Object.values(tasks).filter(Boolean).length;
   const progressPercent = Math.round((completedCount / 3) * 100);
@@ -95,7 +183,6 @@ const [userProgress, setUserProgress] = useState<Record<number, { quiz: boolean,
   const openModal = (type: string, title: string, desc: string, sessionId: number = 0) => {
     setModalData({ isOpen: true, type, sessionId, title, desc });
   };
-
 
   const handleConfirmAction = () => {
     if (modalData.type === 'sim') {
@@ -108,15 +195,6 @@ const [userProgress, setUserProgress] = useState<Record<number, { quiz: boolean,
       }));
     }
     setModalData({ isOpen: false, type: '', sessionId: 0, title: '', desc: '' });
-  };
-
-    const handleSurveyClick = (sessionId: number, url: string) => {
-    window.open(url, '_blank');
-    // Marcamos la encuesta como completada
-    setUserProgress(prev => ({
-      ...prev,
-      [sessionId]: { ...prev[sessionId], survey: true }
-    }));
   };
 
   const CheckIcon = () => (
@@ -276,37 +354,94 @@ const [userProgress, setUserProgress] = useState<Record<number, { quiz: boolean,
 
           <div className={styles.lmsToolsGrid} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
             
-            {/* 1. Simulador */}
-            <div className={styles.lmsToolCard}>
-              <div className={styles.toolIconWrap}>
-                <img src={dropIcon} alt="Rayo" className={styles.toolPixelIcon} />
-              </div>
-              <h3>Simulador Oficial</h3>
-              <p>Practica con preguntas cronometradas formato Pearson VUE.</p>
-              <button 
-                className={styles.btnToolPrimary} 
-                onClick={() => openModal('sim', 'Ingresar al Simulador', '¿Estás listo para iniciar el test de 65 preguntas cronometradas?')}
-              >
-                Ingresar al Simulador
-              </button>
+          {/* 1. Simulador */}
+          <article className={styles.simCard}>
+            <div className={styles.simCardBgGlow}></div>
+            
+            {/* Top Row Badge */}
+            <div className={styles.simBadgeRow}>
+              <span className={styles.simBadge}>● RECOMENDADO</span>
+              <span className={styles.simFormatText}>Pearson VUE Format</span>
             </div>
+          
+            {/* Center Pixel Icon with Radiant Border */}
+            <div>
+              <div className={styles.simIconContainer}>
+                <img src={dropIcon} alt="Icono Rayo Pixel" className={styles.simIcon} />
+              </div>
+              
+              {/* Title & Description */}
+              <h2 className={styles.simTitle}>Simulador Oficial</h2>
+              <p className={styles.simDesc}>
+                Practica con preguntas cronometradas de 65 reactivos en formato exacto Pearson VUE con explicaciones y retroalimentación inmediata.
+              </p>
+            </div>
+          
+            {/* Benefit Stats */}
+            <div className={styles.simStatsRow}>
+              <div className={styles.simStatCol}>
+                <span className={styles.simStatLabel}>Tiempo</span>
+                <span className={styles.simStatValue}>90 Min</span>
+              </div>
+              <div className={styles.simDivider}></div>
+              <div className={styles.simStatCol}>
+                <span className={styles.simStatLabel}>Reactivos</span>
+                <span className={`${styles.simStatValue} ${styles.cyan}`}>65 Ítems</span>
+              </div>
+              <div className={styles.simDivider}></div>
+              <div className={styles.simStatCol}>
+                <span className={styles.simStatLabel}>Pase</span>
+                <span className={`${styles.simStatValue} ${styles.mint}`}>700 / 1000</span>
+              </div>
+            </div>
+          
+            {/* Action Button */}
+            <button 
+              className={styles.simButton} 
+              onClick={() => openModal('sim', 'Ingresar al Simulador', '¿Estás listo para iniciar el test de 65 preguntas cronometradas?')}
+            >
+              <span>Ingresar al Simulador</span>
+              <span style={{ fontSize: '1.1rem' }}>⚡</span>
+            </button>
+          </article>
 
             {/* 2. AWS Skill Builder */}
-            <div className={styles.lmsToolCard}>
-              <img 
-                src={skillBuilderLogo} 
-                alt="AWS Skill Builder" 
-                className={styles.skillLogo} 
-              />
-              <h3>AWS Skill Builder</h3>
-              <p>Accede a la plataforma oficial de entrenamiento y cursos gratuitos de Amazon.</p>
-              <button 
-                className={styles.btnToolOutline}
-                onClick={() => window.open('https://skillbuilder.aws/?utm_source=copilot.com', '_blank')}
-              >
-                Ir a Skill Builder
-              </button>
+          <article className={styles.skillCard}>
+            
+            {/* Top Row Badge */}
+            <div className={styles.skillBadgeRow}>
+              <span className={styles.skillBadgePurple}>Oficial AWS Training</span>
+              <span className={styles.skillFormatText}>Plan Digital Gratuito</span>
             </div>
+          
+            {/* Center Logo Container */}
+            <div style={{ textAlign: 'center' }}>
+              <div className={styles.skillLogoContainer}>
+                <img src={skillBuilderLogo} alt="AWS Skill Builder" className={styles.skillLogoImg} />
+              </div>
+              
+              {/* Title & Description */}
+              <h2 className={styles.skillTitle}>AWS Skill Builder</h2>
+              <p className={styles.skillDesc}>
+                Accede a la plataforma oficial de entrenamiento con cursos digitales guiados por expertos y laboratorios interactivos Cloud Quest.
+              </p>
+            </div>
+          
+            {/* Course Tags */}
+            <div className={styles.skillTagsContainer}>
+              <span className={styles.skillTag}>📚 Cloud Practitioner Essentials</span>
+              <span className={styles.skillTag}>🎮 AWS Cloud Quest: Role RPG</span>
+            </div>
+          
+            {/* Action Button Secondary */}
+            <button 
+              className={styles.skillButton}
+              onClick={() => window.open('https://skillbuilder.aws/?utm_source=copilot.com', '_blank')}
+            >
+              <span>Ir a Skill Builder</span>
+              <span style={{ fontFamily: 'JetBrains Mono' }}>↗</span>
+            </button>
+          </article>
 
           </div>
         </section>
@@ -314,17 +449,34 @@ const [userProgress, setUserProgress] = useState<Record<number, { quiz: boolean,
         {/* ================= MÓDULO 3: CERTIFICADO COMUNITARIO ================= */}
         <section className={styles.certificateBanner}>
           <div className={styles.certBannerLeft}>
-            <img src={card19} alt="Certificado" className={styles.hugeIcon} />
-            <div>
-              <h3>Certificado de Finalización Comunitaria</h3>
-              <p>
+            <div className={styles.certIconWrap}>
+              
+              {/* Ícono H-Gate original del diseño de Stitch */}
+              <svg className={styles.hGateIcon} fill="currentColor" viewBox="0 0 16 16">
+                <rect height="4" width="2" x="4" y="2"></rect>
+                <rect height="4" width="2" x="10" y="2"></rect>
+                <rect height="8" width="2" x="2" y="4"></rect>
+                <rect height="8" width="2" x="12" y="4"></rect>
+                <rect height="4" width="2" x="4" y="10"></rect>
+                <rect height="4" width="2" x="10" y="10"></rect>
+                <rect height="2" width="8" x="4" y="7"></rect>
+              </svg>
+
+            </div>
+            <div className={styles.certTextContainer}>
+              <h3 className={styles.certTitle}>Certificado de Finalización Comunitaria</h3>
+              <p className={styles.certDesc}>
                 Al completar el simulador, asistir a los eventos y llenar las encuestas, podrás extraer tu certificado digital avalado por el AWS Student Builder Group <span id="calendario-charlas">ITB.</span>
               </p>
             </div>
           </div>
-          <button className={styles.btnClaimLocked} disabled>
-            🔒 Reclamar Certificado
-          </button>
+          
+          <div className={styles.certActionContainer}>
+            <button className={styles.btnClaimLocked} disabled>
+              <span>🔒</span> Reclamar Certificado
+            </button>
+            <p className={styles.certRequirementText}>Completa los requisitos para desbloquear</p>
+          </div>
         </section>
 
 
@@ -351,7 +503,7 @@ const [userProgress, setUserProgress] = useState<Record<number, { quiz: boolean,
                 <div className={styles.surpriseOverlay}>
                   <img src={relogIcon} alt="Trabajando" className={styles.surpriseIcon} />
                   <h3 className={styles.surpriseTitle}>¡Casi listo!</h3>
-                  <p className={styles.surpriseDesc}>Estamos preparando el lanzamiento oficial de nuestro primer evento.</p>
+                  <p className={styles.surpriseDesc}>Estamos preparando el lanzamiento oficial de nuestro segundo evento.</p>
                 </div>
               )}
               
@@ -418,9 +570,21 @@ const [userProgress, setUserProgress] = useState<Record<number, { quiz: boolean,
                       </div>
                       
                       {userProgress[session.id]?.survey ? (
-                        <span className={`${styles.btnTextLink} ${styles.completed}`}><CheckIcon/> Listo</span>
+                        /* "Listo" ahora es un botón que permite volver a abrir el link */
+                        <button 
+                          className={`${styles.btnTextLink} ${styles.completed}`} 
+                          onClick={() => window.open(session.surveyUrl, '_blank')}
+                        >
+                          <CheckIcon/> Listo ↗
+                        </button>
                       ) : session.isSurveyActive ? (
-                        <button className={styles.btnTextLink} onClick={() => handleSurveyClick(session.id, session.surveyUrl)}>Llenar encuesta ↗</button>
+                        <button 
+                          className={styles.btnTextLinkPurple} 
+                          onClick={() => handleSurveyClick(session.id, session.surveyUrl)}
+                        >
+                          {/* Si está contando el minuto pero regresaron antes, mostramos un feedback */}
+                          {pendingSurveys[session.id] ? 'Verificando... ⏳' : 'Llenar encuesta ↗'}
+                        </button>
                       ) : (
                         <span className={styles.btnTextLinkDisabled}>🔒 Bloqueado</span>
                       )}
